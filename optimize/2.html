@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="ul"></div>
+    <script>
+        var ul = document.getElementById("ul");
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < 20; i++) {
+            var li = document.createElement("li");
+            li.innerHTML = "index: " + i;
+            fragment.appendChild(li);
+        }
+        ul.appendChild(fragment);
+    </script>
+</body>
+
+</html>
