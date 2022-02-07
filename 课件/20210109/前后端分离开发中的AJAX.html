@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>前后端分离开发中的AJAX</title>
+  <meta charset='utf-8'>
+  <link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'>
+  <style>
+    .note-content {
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='preview-contents' class='note-content'>
+    <h3 id="ajax基础知识">AJAX基础知识</h3>
+
+    <h4 id="1-什么是ajax">1. 什么是AJAX？</h4>
+    <ul>
+      <li>
+        <p>AJAX解决了网页异步刷新的问题</p>
+
+        <ul>
+          <li>
+            <p>什么是同步刷新</p>
+          </li>
+          <li>
+            <p>什么是异步刷新</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>XML 和 JSON</p>
+      </li>
+    </ul>
+
+    <h4 id="2ajax的基础操作">2.AJAX的基础操作</h4>
+    <ul>
+      <li>
+        <p>核心四步</p>
+
+        <ul>
+          <li>
+            <p>创建XHR（ActiveXObject）</p>
+          </li>
+          <li>
+            <p>打开URL</p>
+          </li>
+          <li>
+            <p>监听状态和获取数据</p>
+          </li>
+          <li>
+            <p>发送请求</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>HTTP请求方式</p>
+
+        <ul>
+          <li>
+            <p>GET：GET、DELETE、HEAD、OPTIONS</p>
+          </li>
+          <li>
+            <p>POST：POST、PUT</p>
+          </li>
+          <li>
+            <p>GET和POST系列的区别</p>
+
+            <ul>
+              <li>
+                <p>传递信息的方式</p>
+              </li>
+              <li>
+                <p>POST相对安全</p>
+              </li>
+              <li>
+                <p>GET容易产生缓存</p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>AJAX状态码</p>
+
+        <ul>
+          <li>
+            <p>0 =&gt;UNSENT</p>
+          </li>
+          <li>
+            <p>1 =&gt;OPENED</p>
+          </li>
+          <li>
+            <p>2 =&gt;HEADERS_RECEIVED</p>
+          </li>
+          <li>
+            <p>3 =&gt;LOADING</p>
+          </li>
+          <li>
+            <p>4 =&gt;DONE</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>汇总XHR的属性和方法及事件</p>
+
+        <ul>
+          <li>
+            <p>xhr.response / xhr.responseText / xhr.responseXML</p>
+          </li>
+          <li>
+            <p>xhr.status / xhr.statusText</p>
+          </li>
+          <li>
+            <p>xhr.timeout</p>
+          </li>
+          <li>
+            <p>xhr.withCredentials</p>
+          </li>
+          <li>
+            <p>xhr.abort()</p>
+          </li>
+          <li>
+            <p>xhr.getAllResponseHeaders()</p>
+          </li>
+          <li>
+            <p>xhr.getResponseHeader([key])</p>
+          </li>
+          <li>
+            <p>xhr.open()</p>
+          </li>
+          <li>
+            <p>xhr.overrideMimeType()</p>
+          </li>
+          <li>
+            <p>xhr.send()</p>
+          </li>
+          <li>
+            <p>xhr.setRequestHeader()</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4 id="3基于ajax获取服务器时间">3.基于AJAX获取服务器时间</h4>
+    <blockquote>
+      <p>实战案例开发：倒计时抢购</p>
+    </blockquote>
+
+    <h4 id="4axios类库的应用">4.AXIOS类库的应用</h4>
+    <blockquote>
+      <p><a href="http://www.axios-js.com/zh-cn/docs/" target="_blank">http://www.axios-js.com/zh-cn/docs/</a></p>
+    </blockquote>
+
+    <ul>
+      <li>
+        <p>安装</p>
+      </li>
+      <li>
+        <p>基础语法</p>
+
+        <ul>
+          <li>
+            <p>axios.get</p>
+          </li>
+          <li>
+            <p>axios.post</p>
+          </li>
+          <li>
+            <p>axios.all</p>
+          </li>
+          <li>
+            <p>axios.spread</p>
+          </li>
+          <li>
+            <p>……</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>配置默认值</p>
+
+        <ul>
+          <li>
+            <p>axios.defaults.baseURL</p>
+          </li>
+          <li>
+            <p>axios.defaults.withCredentials</p>
+          </li>
+          <li>
+            <p>请求拦截器 axios.interceptors.request</p>
+
+            <ul>
+              <li>
+                <p>form-data、x-www-form-urlencoded、raw</p>
+              </li>
+              <li>
+                <p>QS库</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>响应拦截器 axios.interceptors.response</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>

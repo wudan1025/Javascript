@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>珠峰在线Web高级</title>
+</head>
+
+<body>
+    珠峰培训
+    <script>
+        fetch('/subscriptions/recommended_collections')
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            });
+    </script>
+</body>
+
+</html>

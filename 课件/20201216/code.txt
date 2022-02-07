@@ -1,0 +1,9 @@
+this.x = 10;
+this.y = 20;
+this.say = function () {};
+
+let obj={
+    fn:function(){},
+    //ES6
+    fn(){}
+};

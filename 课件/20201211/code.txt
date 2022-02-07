@@ -1,0 +1,12 @@
+var x = 5,
+    y = 6;
+function func() {
+    x += y;
+    func = function (y) {
+        console.log(y + (--x));
+    };
+    console.log(x, y);
+}
+func(4);
+func(3);
+console.log(x, y);

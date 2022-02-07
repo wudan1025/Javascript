@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线Web高级</title>
+</head>
+
+<body>
+    <script src="node_modules/zepto/dist/zepto.min.js"></script>
+    <!-- 
+        //暴露API
+        $ -> Zepto
+        Zepto -> Zepto
+     -->
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- 
+        _jQuery=window.jQuery;   undefined
+        _$ = window.$;   Zepto
+        
+        //暴露API
+        $ -> jQuery
+        jQuery -> jQuery
+     -->
+    <script>
+        var j = jQuery.noConflict(true);
+        /* 
+         deep->传递进来的true
+         if (window.$ === jQuery) {
+            window.$ = _$;  =>转让$的使用权 Zepto
+         }
+         if (deep && window.jQuery === jQuery) {
+            window.jQuery = _jQuery;
+         }
+         return jQuery; */
+    </script>
+    
+
+
+</body>
+
+</html>

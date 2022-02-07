@@ -1,0 +1,4 @@
+const slow = await resolveAfter2Seconds();
+console.log(slow);
+const fast = await resolveAfter1Second();
+console.log(fast);

@@ -1,0 +1,3 @@
+let instance = axios.create();
+instance.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+// ....
