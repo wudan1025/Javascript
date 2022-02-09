@@ -5,6 +5,11 @@
 // 20201202 - 2021204
 
 // 1. 原始值类型「基本数据类型」有什么
+/*
+ 6+2
+ 6: undefined,null,bool,string,number,object
+ 2: bigint,synbol
+ */
 
 // 2. 对象类型「下数所说的应该都是基于构造函数创造出来的实例」有什么
 
