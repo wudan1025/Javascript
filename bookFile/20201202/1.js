@@ -29,7 +29,10 @@
  *    + Number对象 \ String对象 \ Boolean布尔对象 \ Symbol符号对象 ...
  */
 
-// 应用：作为对象的非String类型的属性、创建唯一标识「统一宏管理」、内置原理也是基于Symbol的一些属性实现的...
+/* 应用：作为对象的非String类型的属性、
+创建唯一标识「统一宏管理」、
+内置原理也是基于Symbol的一些属性实现的...*/
+
 /* let sym1 = Symbol('A'),
     sym2 = Symbol('A');
 console.log(sym1 === sym2); //->false */

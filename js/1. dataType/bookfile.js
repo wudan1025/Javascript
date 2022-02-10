@@ -1,3 +1,8 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
+/*
 数据类型转换规则及Symbol.toPrimitive
 18.2.5 parseInt(string, radix)
 20.1 Number Objects
@@ -11,7 +16,10 @@ if (a == 1 && a == 2 && a == 3) {
 let arr = [27.2, 0, '0013', '14px', 123];
 arr = arr.map(parseInt);
 console.log(arr);
-JS运行机制: 堆(Heap) / 栈(Stack) / 上下文(EC) / 全局对象(GO) / 变量对象(VO / AO)
+JS运行机制: 
+堆(Heap) / 栈(Stack) / 
+上下文(EC) / 全局对象(GO) / 
+变量对象(VO / AO)
 var a = 12;
 var b = a;
 b = 13;
@@ -44,3 +52,4 @@ function fn(y) {
 }
 fn(x);
 console.log(x);
+*/

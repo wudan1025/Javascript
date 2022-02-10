@@ -1,12 +1,16 @@
 /*
- * 数据类型检测 
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
+/*
+ * 数据类型检测
  *   typeof 返回字符串
  *      typeof null ->"object"
  *      typeof 实现CALL的对象「函数、箭头函数、生成器函数、构造函数」 ->"function"
  *      typeof 剩下未实现CALL的对象 ->"object"
- *   
+ *
  *   ECMAScript提供的内置类型在计算机底层都是按照二进制数据存储的
- *      以对应的数字开始代表不同的类型 
+ *      以对应的数字开始代表不同的类型
  *      1:数字   010:浮点数
  *      100:字符串
  *      110:布尔
