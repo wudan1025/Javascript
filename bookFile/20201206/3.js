@@ -1,9 +1,9 @@
 /*
- * let&const VS var&function 区别 
+ * let&const VS var&function 区别
  */
 //===================
 // 变量提升:var存在变量提升的，但是let不存在
-/* 
+/*
  * EC(G)
  *   变量提升：把当前上下文中所有带var/function关键字的进行提前的声明或者定义(var->声明 function->声明+定义)
  *      var n;
@@ -29,10 +29,14 @@ console.log(n); */
 
 //----------
 
-// 在“全局上下文中”，基于var/let声明的变量，和GO(window)的关系是不一样的
-// 基于var/function声明的变量：除了往全局变量对象中存储一份，而且也给GO(window)设置了对应的属性 「映射机制」（新版处理机制：在全局上下文中，基于var/function声明的变量，直接存储到GO中（VO(G)中不留了））
+// 在“全局上下文中”，基于var/let声明的变量，
+// 和GO(window)的关系是不一样的
+// 基于var/function声明的变量：除了往全局变量对象中存储一份，
+// 而且也给GO(window)设置了对应的属性 「映射机制」
+//（新版处理机制：在全局上下文中，基于var / function声明的变量，
+// 直接存储到GO中（VO(G)中不留了））
 // GO->{..., n:10 }
-/* 
+/*
  * EC(G)
  *  VO(G) 全局变量对象
  *    n -> 10
@@ -58,25 +62,24 @@ console.log(n); */
 // console.log(typeof n); //Uncaught ReferenceError: Cannot access 'n' before initialization let的机制抵消了暂时性死区的机制
 // let n = 10;
 
-
 //----------
 // let会产生“块级作用域（私有的上下文）”：全局上下文、函数执行的私有上下文、块级私有上下文
 //   + 除函数体以及创建对象的大括号外，其余大部分包含代码块的大括号（例如：判断体、循环体...）都有可能会产生块级上下文
 {
-    /*
-     * 在代码块中，首先看是否出现 let/const/function「特殊」，如果出现，此时就会形成一个块级私有上下文 
-     *   EC(BLOCK)
-     *     VO(BLOCK): m->20
-     *     作用域链:<EC(BLOCK),EC(G)> 上级上下文就是代码执行所处的环境
-     *     ->没有自己的THIS，用到的this用的也都是上级上下文中的
-     *     ->没有arguments
-     *     ->没有形参赋值
-     *     ->有变量提升，也只是针对特殊的function
-     * 即使产生块级上下文，对var的操作也是无效的「var不受块级上下文的影响」
-     */
-    var n = 10; //全局的n
-    let m = 20; //块级私有的
-    console.log(n, m); //->10/20
+  /*
+   * 在代码块中，首先看是否出现 let/const/function「特殊」，如果出现，此时就会形成一个块级私有上下文
+   *   EC(BLOCK)
+   *     VO(BLOCK): m->20
+   *     作用域链:<EC(BLOCK),EC(G)> 上级上下文就是代码执行所处的环境
+   *     ->没有自己的THIS，用到的this用的也都是上级上下文中的
+   *     ->没有arguments
+   *     ->没有形参赋值
+   *     ->有变量提升，也只是针对特殊的function
+   * 即使产生块级上下文，对var的操作也是无效的「var不受块级上下文的影响」
+   */
+  var n = 10; //全局的n
+  let m = 20; //块级私有的
+  console.log(n, m); //->10/20
 }
 console.log(n); //->10
 console.log(m); //->Uncaught ReferenceError: m is not defined

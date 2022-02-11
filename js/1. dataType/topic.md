@@ -56,6 +56,7 @@ if (a == 1 && a == 2 && a == 3) {
 ```
 #### 结果
 ```
+// 方案1
 var a = {
     b:0,
     // 或 valueOf
@@ -64,10 +65,23 @@ var a = {
     }
 }
 
+// 方案2
+var i = 0;
+Object.defineProperty(window, 'a', {
+    get() {
+        return ++i;
+    }
+});
+if (a == 1 && a == 2 && a == 3) {
+    console.log('OK');
+}
+
+
 ```
 
 # 5. 输出结果
 #### 题目
+> 重点
 ```
 let arr = [27.2, 0, '0013', '14px', 123];
 arr = arr.map(parseInt);

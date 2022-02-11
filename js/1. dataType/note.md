@@ -1,3 +1,7 @@
+<!--
+ * @LastEditors: wudan01
+ * @description: 文件描述
+-->
 /*
  * @LastEditors: wudan01
  * @description: 文件描述
@@ -66,5 +70,6 @@ Symbol.iterator
 1. 转化为二进制 判断 
 */
 
-// 7. 数据类型转换
+# 7. 类型转换
 
+#### 1. 触发隐士类型转换
