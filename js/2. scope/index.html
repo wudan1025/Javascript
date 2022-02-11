@@ -13,7 +13,32 @@
 </head>
 
 <body>
-  <script src="1.js"></script>
+  <!-- <script src="1.js"></script> -->
+  <script>
+    var result = []
+    for (var i = 0; i < 5; i++) {
+      result[i] = function () {
+        console.log(i)
+      }
+    }
+
+    /*使用 var 没有块级作用域 代码 解析阶段 给 result[i] 
+    赋值都为 fn 字符串，等到函数执行时，才会 动态获取值内容, 此时去找，当前作用域下 i=5 
+    */
+
+    result[0]()
+    result[1]()
+    result[2]()
+    result[3]()
+    result[4]()
+
+    // console.log(result[0]())
+    // console.log(result[1]())
+    // console.log(result[2]())
+    // console.log(result[3]())
+    // console.log(result[4]())
+
+  </script>
 </body>
 
 </html>
