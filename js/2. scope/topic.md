@@ -293,6 +293,8 @@ fn(4);
 console.log(obj.x, x);
 ```
 #### 答案
+> http://www.javascriptpeixun.cn/course/2801/task/168089/show
+		36分钟： 试题解析
 ```
 var x = 3,
   obj = {

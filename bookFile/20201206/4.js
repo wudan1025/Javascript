@@ -17,7 +17,8 @@
  *     xxx.addEventListener('xxx',function(){})  
  *     xxx.attachEvent('onxxx',function(){})
  * 
- * 给当前元素的某个事件行为绑定方法「此时是创建方法，方法没执行」，当事件行为触发，浏览器会把绑定的函数执行，此时函数中的this->当前元素对象本身
+ * 给当前元素的某个事件行为绑定方法「此时是创建方法，方法没执行」，
+ * 当事件行为触发，浏览器会把绑定的函数执行，此时函数中的this->当前元素对象本身
  * 特殊：基于attachEvent实现事件绑定，方法执行，方法中的this是window
  */
 // document.body.addEventListener('click', function () {

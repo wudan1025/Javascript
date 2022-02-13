@@ -13,26 +13,41 @@
 </head>
 
 <body>
+  <button id="load">load</button>
   <!-- <script src="1.js"></script> -->
   <script>
-    var result = []
-    for (var i = 0; i < 5; i++) {
-      result[i] = function () {
-        console.log(i)
-      }
-    }
+    // 闭包
+    // var result = []
+    // for (var i = 0; i < 5; i++) {
+    //   result[i] = function () {
+    //     console.log(i)
+    //   }
+    // }
 
+    // 参考 mygithub/Javascript/bookFile/20201206/2.png 
     // 问题 代码解析阶段干什么？变量提升？代码执行？
+    /*
+     * 在代码块中，首先看是否出现 let/const/function「特殊」，
+     * 如果出现，此时就会形成一个块级私有上下文
+     *   EC(BLOCK)
+     *     VO(BLOCK): m->20
+     *     作用域链:<EC(BLOCK),EC(G)> 上级上下文就是代码执行所处的环境
+     *     ->没有自己的THIS，用到的this用的也都是上级上下文中的
+     *     ->没有arguments
+     *     ->没有形参赋值
+     *     ->有变量提升，也只是针对特殊的function
+     * 即使产生块级上下文，对var的操作也是无效的「var不受块级上下文的影响」
+     */
     // 为何块级作用域及 不干了？
-    /*使用 var 没有块级作用域 代码 解析阶段 给 result[i] 
-    赋值都为 fn 字符串，等到函数执行时，才会 动态获取值内容, 此时去找，当前作用域下 i=5 
+    /*使用 var 没有块级作用域  给 result[i] 
+    赋值都为 fn 字符串，等到result[i]执行 ，才会 动态获取值内容, 此时去找，当前作用域下 i=5 
     */
 
-    result[0]()
-    result[1]()
-    result[2]()
-    result[3]()
-    result[4]()
+    // result[0]()
+    // result[1]()
+    // result[2]()
+    // result[3]()
+    // result[4]()
 
     // console.log(result[0]())
     // console.log(result[1]())
@@ -41,6 +56,8 @@
     // console.log(result[4]())
 
   </script>
+  <script src="./函数执行this.js"></script>
+
 </body>
 
 </html>

@@ -40,6 +40,7 @@ let result = 100 + true + 21.2 + null + undefined + "Tencent" + [] + null + 9 + 
 console.log(result);
 ```
 #### 结果
+> http://www.javascriptpeixun.cn/course/2801/task/167575/show 1:09 
 todo
 ```
 NaNTencentnull9false
