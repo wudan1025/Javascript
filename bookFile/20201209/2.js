@@ -1,3 +1,7 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 // 老版本浏览器下
 // 变量提升：foo = 0x0001; [[scope]]:EC(G)
 

@@ -47,5 +47,10 @@ const 声明后存取的值不可改变(变量或地址)
 // Javascript/bookFile/20201206/3.js
 
 # 5. this指向问题
-// Javascript/bookFile/20201206/4.js
-// 严格模式下有不同
+// 参考笔记
+
+# 6. 简述你对闭包的理解，以及其优缺点
+// todo
+// /Users/xes/Desktop/basic/Javascript/bookFile/20201211/1.js
+
+
