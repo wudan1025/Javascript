@@ -11,9 +11,11 @@ var submit = document.getElementById('load');
 
 submit.addEventListener(
   'click',
-  throttle(
+  throttle_my(
     function () {
+      console.log('执行cb的时间' + new Date())
       console.log('click2');
+
     },
     3000,
     true
@@ -21,18 +23,17 @@ submit.addEventListener(
 );
 
 // 第一次点击 remain s 后执行，这之间的点击不响应
-function throttle_my(remain, cb, immediate) {
+function throttle_my(cb, remain, immediate) {
   // 此时不能 按照上一次时间记录，因为这是外层代码执行时间
   // 不是内层函数执行时间
   var pre, now;
   var exec = false;
   var timer = null;
+  // console.log(remain)
 
   return function () {
-    if (immediate && !exec) {
-      cb();
-      exec = true;
-    }
+    // debugger
+    console.log(new Date())
     if (timer) {
       now = new Date().getTime();
     } else {
@@ -42,11 +43,22 @@ function throttle_my(remain, cb, immediate) {
       timer = setTimeout(() => {
         if (!immediate) {
           cb();
+          clearTimeout(timer);
+          timer = null;
+          pre = now;
+          exec = false;
         }
       }, remain);
     }
+    if (immediate && !exec) {
+      console.log(new Date())
+      cb();
+      exec = true;
+    }
     // console.log(now - pre);
     if (now - pre > remain) {
+      // todo 当前剩余时间
+      cb()
       clearTimeout(timer);
       timer = null;
       pre = now;
