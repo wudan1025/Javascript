@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <title>Demo</title>
+</head>
+
+<body>
+  <div id="cache">异步加载的 JS 资源没有存储到内存中</div>
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://i.snssdk.com/slardar/sdk.js";
+        var x = document.getElementsByTagName("script")[0];
+        x.parentNode.insertBefore(s, x);
+      }, 1000);
+    };
+  </script>
+</body>
+
+</html>

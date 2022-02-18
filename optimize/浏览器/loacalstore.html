@@ -1,0 +1,70 @@
+<!--
+ * @LastEditors: wudan01
+ * @description: 文件描述
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let storage = {
+      // 存储方法
+      setStorage: function (key, value, duration) {
+        let data = {
+          value: value,
+          expiryTime: !duration || isNaN(duration) ? 0 : this.getCurrentTimeStamp() + parseInt(duration)
+        }
+
+        localStorage[key] = JSON.stringify(data) // 进行序列化操作
+      },
+      // 获取方法
+      getStorage: function (key) {
+        let data = localStorage[key]
+
+        if (!data || data === "null") {
+          return null
+        }
+
+        let now = this.getCurrentTimeStamp()
+        let obj
+
+        try {
+          obj = JSON.parse(data); // 进行反序列化操作
+        } catch (e) {
+          return null
+        }
+
+        if (obj.expiryTime === 0 || obj.expiryTime > now) {
+          return obj.value
+        }
+
+        return null
+      },
+      // 删除方法
+      removeStorage: function (key) {
+        localStorage.removeItem(key)
+      },
+      // 获取当前时间戳
+      getCurrentTimeStamp: function () {
+        return Date.parse(new Date())
+      }
+    }
+
+    // 存储
+    let userinfo = { name: 'juejin', age: 18 }
+
+    storage.setStorage('userinfo', userinfo)
+
+    // 获取
+    console.log(storage.getStorage('userinfo')) // { name: 'juejin', age: 18 }
+  </script>
+</body>
+
+</html>
