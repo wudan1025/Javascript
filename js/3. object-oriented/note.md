@@ -5,7 +5,6 @@
 ```
 // 20201216 - 20201220
 
-// 1. 判断属性在实力上还是原型链上
 // 2. 实现bind 等
 // 3. 继承
 ```
@@ -122,4 +121,35 @@ function hasPubProperty(attr, obj) {
 console.log(hasPubProperty('a', f)); // fasle
 console.log(hasPubProperty('say', f)); // false
 console.log(hasPubProperty('toString', f)); // true
+```
+
+# 6 原型及原型链
+> 类(class) / 函数(Function) 有 prototype 属性，指向一个对象，为原型对象
+
+> 实例(new class / new Fn) 有 __proto__, 指向一个对象，为原型对象
+
+> 实例(new class / new Fn) 有 constructor, 指向 (class/Fn)
+
+# 7 自己实现 call
+> todo 是否正确
+```
+~ function () {
+  function call(context) {
+    context = context || window;
+    let args = [].slice.call(arguments, 1),
+      result;
+    context.$fn = this;
+    result = context.$fn(...args);
+    delete context.$fn;
+    return result;
+  }
+  Function.prototype.call = call;
+}();
+
+function fn1() { console.log(1); }
+function fn2() { console.log(2); }
+fn1.call(fn2);
+fn1.call.call(fn2);
+Function.prototype.call(fn1);
+Function.prototype.call.call(fn1);
 ```
