@@ -124,11 +124,23 @@ console.log(hasPubProperty('toString', f)); // true
 ```
 
 # 6 原型及原型链
+#### prototype
 > 类(class) / 函数(Function) 有 prototype 属性，指向一个对象，为原型对象
 
-> 实例(new class / new Fn) 有 __proto__, 指向一个对象，为原型对象
+> 有 prototype 的函数类型包括 普通函数，构造函数(自定义，内置)，生成器函数
+
+> 箭头函数 没有 prototype 
+
+#### __proto__
+> 实例(new class / new Fn) 和 对象 有 __proto__, 指向一个对象，为原型对象
 
 > 实例(new class / new Fn) 有 constructor, 指向 (class/Fn)
+
+> 有 __proto__ 的对象包括，普通对象，数组，正则对象,prototype 等
+
+
+
+> 特殊 Function.protptype 是一个函数
 
 # 7 自己实现 call
 > todo 是否正确
@@ -153,3 +165,4 @@ fn1.call.call(fn2);
 Function.prototype.call(fn1);
 Function.prototype.call.call(fn1);
 ```
+

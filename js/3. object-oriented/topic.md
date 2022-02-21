@@ -112,9 +112,17 @@ function getName() {
 }
 Foo.getName(); // 2
 getName(); // 4
-Foo().getName(); // return this 指向foo? // 2
-getName(); // 4
-new Foo.getName(); // 1
-new Foo().getName(); //1
+
+// 修改 window 下 getFoo
+Foo().getName(); // 1
+
+// window 下 getName
+getName(); // 1 
+
+new Foo.getName(); // 2 不明白？
+
+//new Foo 和 new Foo() 差别
+
+new Foo().getName(); // 3
 new new Foo().getName(); // 执行顺序？
 ```
