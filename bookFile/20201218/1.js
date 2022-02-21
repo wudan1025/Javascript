@@ -1,3 +1,7 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 /* function fun() {
     this.a = 0;
     this.b = function () {
@@ -42,7 +46,6 @@ console.log(obj === obj2); //false */
 /* let obj = Object.assign({}, obj1, obj2);
 console.log(obj); //->返回的是第一个参数「也就是全新的一个对象」 */
 
-
 /* function Fn(obj, extend) {
     if (extend) {
         for (let key in obj) {
@@ -64,19 +67,19 @@ let f = new Fn; */
 Object.prototype.xx = 'xx';
 
 let obj = {
-    name: 'zhufeng',
-    age: 12,
-    3: 200,
-    0: 100,
-    [Symbol('AA')]: function () {}
+  name: 'test',
+  age: 12,
+  3: 200,
+  0: 100,
+  [Symbol('AA')]: function () {},
 };
 // + 优先遍历数字属性，而且按照从小到大遍历；数字属性遍历完，再去遍历其他的；
 // + 无法遍历Symbol的私有属性
 // + 遍历所属类原型上自定义的属性和方法「遍历了公有的：内置的是不可枚举的、自定义的属性是可枚举的」
-/* for (let key in obj) {
-    if (!obj.hasOwnProperty(key)) break; //解决问题三 
-    console.log(key, obj[key]);
-} */
+// /* for (let key in obj) {
+//     if (!obj.hasOwnProperty(key)) break; //解决问题三 
+//     console.log(key, obj[key]);
+// } */
 
 /* // 获取私有的属性：Object.keys(obj) OR Object.getOwnPropertyNames(obj) ；返回包含所有非symbol私有属性的数组；
 // Object.getOwnPropertySymbols 获取所有的Symbol私有属性「数组」

@@ -1,11 +1,15 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 function Dog(name) {
-    this.name = name;
+  this.name = name;
 }
 Dog.prototype.bark = function () {
-    console.log('wangwang');
+  console.log('wangwang');
 };
 Dog.prototype.sayName = function () {
-    console.log('my name is ' + this.name);
+  console.log('my name is ' + this.name);
 };
 
 /* let sanmao = new Dog('三毛');
@@ -13,7 +17,7 @@ sanmao.sayName();
 sanmao.bark(); */
 
 /*
- * Ctor:要操作的构造函数「创建它的实例」 
+ * Ctor:要操作的构造函数「创建它的实例」
  * params:数组,存储给Ctor传递的实参集合
  */
 /* function _new(Ctor, ...params) {
@@ -64,7 +68,6 @@ sanmao.bark(); //=>"wangwang"
 sanmao.sayName(); //=>"my name is 三毛"
 console.log(sanmao instanceof Dog); //=>true */
 
-
 /*
  * Object.create([prototype]):创建一个空对象，并且让对象的__proto__指向[prototype]（把[prototype]作为创建空对象的原型）
  */
@@ -76,12 +79,13 @@ console.log(sanmao instanceof Dog); //=>true */
 // console.log(obj);
 
 if (!Object.create) {
-    // IE 6~8
-    Object.create = function create(prototype) {
-        if (!/^(object|function)$/i.test(typeof prototype)) throw new TypeError('Object prototype may only be an Object or null');
+  // IE 6~8
+  Object.create = function create(prototype) {
+    if (!/^(object|function)$/i.test(typeof prototype))
+      throw new TypeError('Object prototype may only be an Object or null');
 
-        function proxy() {}
-        proxy.prototype = prototype;
-        return new proxy;
-    };
+    function proxy() {}
+    proxy.prototype = prototype;
+    return new proxy();
+  };
 }

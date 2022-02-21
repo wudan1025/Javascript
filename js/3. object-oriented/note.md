@@ -22,6 +22,54 @@ let m = new Number(10); //对象
 ```
 
 # 2. 自己实现new
+```
+function Dog(name) {
+  this.name = name;
+  // 导致 new 出的对象 结果为 {}
+  // return {};
+}
+Dog.prototype.bark = function () {
+  console.log('wangwang');
+};
+Dog.prototype.sayName = function () {
+  console.log('my name is ' + this.name);
+};
+
+var test = _new(Dog, 'test');
+// var test = new Dog('test');
+test.sayName();
+test.bark();
+
+function _new(Ctor) {
+  // 构造函数 不是函数 或
+  // 构造函数的原型对象 不是 函数或对象
+  // 箭头函数 没有 prototype, 所以无法new
+  if (
+    typeof Ctor != 'function' ||
+    !/^(object|function)$/.test(typeof Ctor.prototype)
+  ) {
+    throw new TypeError('Ctor is not a constructor');
+  }
+
+  var params = [].slice.call(arguments, 1);
+
+  // 1. 创建新对象，让新对象 __proto__ = 构造函数的prototype
+  // 方案1
+  // let obj = {};
+  // obj.__proto__ = Ctor.prototype;
+
+  // 方案2
+  let obj = Object.create(Ctor.prototype);
+
+  // 2. 修改this 为当前 obj ,使用普通函数方法，执行构造函数,
+  let result = Ctor.apply(obj, params);
+  console.log(result);
+
+  // 3. 判断函数返回值 如果不对对象，则返回当obj
+  if (/^(object|function)$/.test(typeof result)) return result;
+  return obj;
+}
+```
 
 # 3. new Fn() 与 new Fn 区别
 > /Users/wudan/Desktop/work-study/git/Javascript/bookFile/20201216/1.js
@@ -90,9 +138,31 @@ console.log(instanceof_(f, Object));
 > 配合 hasOwnProperty / in 实现 hasPubProperty
 
 ```
+// 方案1
 function hasPubProperty(attr, obj) {
   return attr in obj && !obj.hasOwnProperty(attr);
 }
+```
+
+```
+// 方案2
+Object.prototype.hasPubProperty = function hasPubProperty(attr) {
+    // this->f1
+    var self = this,
+        prototype = Object.getPrototypeOf(self);
+    while (prototype) {
+        // 检测是否存在ATTR这个属性
+        if (prototype.hasOwnProperty(attr)) return true;
+        /* var keys = Object.keys(prototype);
+        if (typeof Symbol !== "undefined") {
+            keys = keys.concat(Object.getOwnPropertySymbols(prototype));
+        }
+        if (keys.indexOf(attr) > -1) return true; */
+        // 一直按照原型链查找
+        prototype = Object.getPrototypeOf(prototype);
+    }
+    return false;
+};
 ```
 #### 对象私有，或在原型链上
 > in 

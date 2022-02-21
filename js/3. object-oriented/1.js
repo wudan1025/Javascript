@@ -53,7 +53,6 @@ console.log(instanceof_(f, Fn));
 console.log(instanceof_(f, Object));
 */
 
-
 /*
 function Fn() {
   this.x = 100;
@@ -90,7 +89,6 @@ console.log(Fn.prototype.__proto__.constructor); // Object
 // Fn.prototype.getY(); // 200
 */
 
-
 // var a = () => {
 //   console.log(this)
 // }
@@ -123,7 +121,6 @@ console.log(Fn.prototype.__proto__.constructor); // Object
 // my_fun.b(); // 0
 // my_fun.c(); // 30
 
-
 // function Fn() {
 //   let a = 1;
 //   this.a = a;
@@ -150,7 +147,6 @@ console.log(Fn.prototype.__proto__.constructor); // Object
 // console.log(f1.hasOwnProperty('b')); // false
 // console.log('b' in f1); // true
 // console.log(f1.constructor == Fn); // true
-
 
 /*
 function Foo() {
@@ -196,6 +192,7 @@ let m = n.plus(10).minus(5);
 console.log(m);//=>15（10+10-5）
 */
 
+/*
 function Modal(x, y) {
   this.x = x;
   this.y = y;
@@ -237,3 +234,61 @@ class Modal1 {
 
 let m2 = new Modal1(10, 20);
 console.log(m2)
+*/
+
+/*
+// 遍历的笔记
+Object.prototype.xx = 'xx';
+
+let obj = {
+  name: 'test',
+  age: 12,
+  3: 200,
+  0: 100,
+  [Symbol('AA')]: function () {},
+};
+
+// for (let key in obj) {
+//   if (!obj.hasOwnProperty(key)) break;
+//   console.log(key, obj[key]);
+// }
+
+[...Object.keys(obj), ...Object.getOwnPropertySymbols(obj)].forEach((key) => {
+  console.log(key, obj[key]);
+});
+*/
+
+/*
+function create(prototype) {
+  if (!/^(object|function)$/i.test(typeof prototype))
+    throw new TypeError('Object prototype may only be an Object or null');
+  // 方案1
+  // let obj = {};
+  // obj.__proto__ = prototype;
+  // return obj;
+  // 方案2
+  function proxy() {}
+  proxy.prototype = prototype;
+  return new proxy();
+}
+
+function Fn() {
+  this.a = 1;
+}
+
+Fn.prototype.a = function a() {
+  console.log('a');
+};
+
+console.log(create(Fn));
+console.log(create(Fn.prototype));
+
+// Object.create = function create(prototype) {
+//   if (!/^(object|function)$/i.test(typeof prototype))
+//     throw new TypeError('Object prototype may only be an Object or null');
+
+//   function proxy() {}
+//   proxy.prototype = prototype;
+//   return new proxy();
+// };
+*/
