@@ -91,6 +91,7 @@ join
 
 # 4
 > 回答错误？
+> 解析看 20201220/2.png 
 ```
 function Foo() {
   getName = function () {
@@ -119,10 +120,10 @@ Foo().getName(); // 1
 // window 下 getName
 getName(); // 1 
 
-new Foo.getName(); // 2 不明白？
+new Foo.getName(); // 2 不明白？ 执行顺序 (new (Foo.getName()))
 
 //new Foo 和 new Foo() 差别
 
-new Foo().getName(); // 3
+new Foo().getName(); // 3 
 new new Foo().getName(); // 执行顺序？
 ```

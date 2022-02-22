@@ -292,3 +292,58 @@ console.log(create(Fn.prototype));
 //   return new proxy();
 // };
 */
+
+/*
+let obj = {
+  x: 0,
+  fn() {
+    // this -> obj
+    let self = this;
+    setTimeout(function () {
+      // this -> window
+      self.x++;
+      console.log(obj.x);
+    }, 1000);
+  }
+};
+obj.fn();
+*/
+
+/*
+let obj = {
+  x: 0,
+  fn() {
+    setTimeout(() => {
+      this.x++;
+      console.log(this)
+      console.log(obj.x);
+    }, 1000);
+  }
+};
+obj.fn();
+*/
+
+/*
+let obj = {
+  x: 0,
+  fn: () => {
+    // 箭头函数，继承外面this
+    // this->window
+    console.log(this);
+  },
+  fn1() {
+    // 普通函数
+    // this->obj
+    console.log(this)
+  }
+};
+obj.fn();
+obj.fn1()
+*/
+
+// function fn(x, y) {
+//   console.log(this, x, y);
+//   return x + y;
+// }
+
+

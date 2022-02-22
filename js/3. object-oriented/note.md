@@ -208,11 +208,66 @@ console.log(hasPubProperty('toString', f)); // true
 
 > 有 __proto__ 的对象包括，普通对象，数组，正则对象,prototype 等
 
-
-
 > 特殊 Function.protptype 是一个函数
 
-# 7 自己实现 call
+#### 既有 __proto__ 又有 prototype
+###### Array 
+> 即使函数又是对象
+> 作为函数 new Array
+```
+Array.prototype.__proto__ == Object.prototype
+```
+> 作为对象 Array.isArray 等方法
+```
+Array.__proto__ == Function.prototype
+```
+###### Funtion
+
+> Funtion 和 Object 的混乱关系
+Function.__proto__  == Function.prototype  ==  Object.__proto__
+
+
+#### 两者都没有
+> 箭头函数
+
+#### 原型链
+> 继承通过 __proto__ 属性去找
+
+```
+// 普通函数
+// 普通函数通过原型链向上找尽头为 普通函数 -> Fn.prototype -> Object.prototype -> null
+function Fn() {
+this.a = '123'
+}
+var fn = new Fn()
+console.log(fn.__proto__ == Fn.prototype) // true
+console.log(fn.__proto__.prototype) // undefined
+console.log(fn.__proto__.__proto__ == Object.prototype) // true
+console.log(fn.__proto__.__proto__.__proto__) // null
+
+// 实例
+// 实例通过原型链向上找 实例->实例的构造函数->Object.prototype->null
+var arr = new Array(1, 2, 3)
+console.log(arr.__proto__ == Array.prototype) // true
+console.log(arr.__proto__.prototype) // undefined
+console.log(arr.__proto__.__proto__ == Object.prototype) // true
+console.log(arr.__proto__.__proto__.__proto__) // null
+
+// 内置构造函数
+// 内置构造函数通过原型链向上找尽头为 内置构造函数 -> Fn.prototype -> Object.prototype -> null
+console.log(Array.__proto__ == Function.prototype) // true
+console.log(Array.__proto__.__proto__ == Object.prototype) // true
+console.log(Array.__proto__.__proto__.__proto__) // null
+console.log(Function.prototype.__proto__ == Object.prototype) // true
+console.log(Object.prototype.__proto__) // null
+```
+
+# 7 call && apply && bind
+> 都在 Function.prototype 的方法
+> call 传递一个参数
+> apply 传递数组
+> call的性能要比apply好一丢丢「尤其是传递的实参在三个以上」
+
 > todo 是否正确
 ```
 ~ function () {

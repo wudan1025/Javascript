@@ -44,6 +44,7 @@ obj.fn(); */
     console.log(this, x, y);
     return x + y;
 }
+fn.__proto__ == Function.prototype
 let obj = {
     name: 'obj'
 }; */
@@ -120,7 +121,8 @@ function fn() {
     // let arr = [...arguments];
     // let arr = Array.from(arguments);
     // 让类数组借用数组原型上的方法，实现类数组转换为数组「大部分数组的方法，都可以被类数组借用」
-    // let arr = Array.prototype.slice.call(arguments, 0);
+    let arr = Array.prototype.slice.call(arguments, 0);
+    arguments.slice(0) -> 改变 this 执行
     let arr = [].slice.call(arguments);
     return arr.reduce((total, item) => total + item); *!/
 
@@ -178,9 +180,9 @@ let obj = {
 // };
 document.onclick = fn.bind(obj, 10, 20);
 
-/* 
+/*
 // 执行bind,fn没有立即执行「预先把fn/obj/10/20都存储起来了」,返回一个新函数
 let proxy = fn.bind(obj, 10, 20);
 // 执行返回的函数,proxy内部帮助我们把fn执行「this和参数该处理都处理了」
-proxy(); 
+proxy();
 */
