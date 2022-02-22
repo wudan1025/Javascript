@@ -1,3 +1,7 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 /* Function.prototype.call = function call(context, ...params) {
     // this(self)->fn  context->obj  params->[10,20]
     context == null ? context = window : null;
@@ -25,18 +29,17 @@ let obj = {
 };
 console.log(fn.call(100, 10, 20)); */
 
-
 // ======作业题======
-var name = '珠峰培训';
+var name = 'test';
 
 function A(x, y) {
-    var res = x + y;
-    console.log(res, this.name);
+  var res = x + y;
+  console.log(res, this.name);
 }
 
 function B(x, y) {
-    var res = x - y;
-    console.log(res, this.name);
+  var res = x - y;
+  console.log(res, this.name);
 }
 B.call(A, 40, 30);
 B.call.call.call(A, 20, 10);

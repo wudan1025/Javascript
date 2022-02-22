@@ -341,9 +341,100 @@ obj.fn();
 obj.fn1()
 */
 
-// function fn(x, y) {
-//   console.log(this, x, y);
-//   return x + y;
-// }
+var obj = {
+  a: 1,
+  getA: function () {
+    console.log(this.a);
+  },
+};
 
+var obj2 = {
+  a: 2,
+};
 
+// Function.prototype.call = function () {
+//   var args = Array.from(arguments);
+//   // debugger;
+//   var _this = args.splice(0, 1);
+//   console.log(_this);
+//   console.log(this);
+// };
+
+// Function.prototype.bind = function () {
+//   var args = [].slice.apply(arguments);
+//   var newThis = args.splice(0, 1)[0];
+//   var params = args;
+//   var self = this;
+//   return function () {
+//     console.log(self);
+//     console.log(newThis);
+//     return self.apply(newThis, params);
+//   };
+// };
+
+/*
+Function.prototype.bind = function (context) {
+  context = context ? context : window;
+  // 方式1
+  // var params = [].slice.call(arguments,1);
+  // 方式2
+  var params = Array.from(arguments).splice(1);
+  var self = this;
+  return function () {
+    var args = Array.from(arguments);
+    params = params.concat(args);
+    return self.apply(context, params);
+  };
+};
+
+Function.prototype.call = function (context) {
+  context = context ? context : window;
+  var params = Array.from(arguments).splice(1);
+  var key = Symbol('KEY');
+  context[key] = this;
+  var result = context[key](params);
+  delete context[key];
+  return result;
+};
+
+console.log(obj.getA());
+console.log(obj.getA.call(obj2));
+// var b = obj.getA.bind(obj2, 1, 2);
+// console.log(b(4));
+
+*/
+
+Function.prototype.call = function (context) {
+  context = context ? context : window;
+  var params = Array.from(arguments).splice(1);
+  console.log('params' + params);
+  var key = Symbol('KEY');
+  context[key] = this;
+  var result = context[key](params);
+  delete context[key];
+  console.log('result', result);
+  return result;
+};
+
+var name = 'test';
+
+function A(x, y) {
+  var res = x + y;
+  debugger;
+  console.log(res, this.name);
+  return res;
+}
+
+function B(x, y) {
+  var res = x - y;
+  console.log(res, this.name);
+  return res;
+}
+// B.call(A, 40, 30);
+B.call.call.call(A, 40, 30);
+// 最后一个call执行
+//   + this:B.call.call 「call方法」
+// Function.prototype.call(A, 60, 50);
+// Function.prototype.call.call.call(A, 80, 70);
+// 最后一个call执行
+//   + this:Function.prototype.call.call 「call方法」
