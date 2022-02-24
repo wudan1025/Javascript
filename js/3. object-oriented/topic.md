@@ -127,3 +127,31 @@ new Foo.getName(); // 2 不明白？ 执行顺序 (new (Foo.getName()))
 new Foo().getName(); // 3 
 new new Foo().getName(); // 执行顺序？
 ```
+
+# 5
+> 答案输出，有问题
+```
+var name = 'test';
+
+function A(x, y) {
+  var res = x + y;
+  debugger;
+  console.log(res, this.name);
+  return res;
+}
+
+function B(x, y) {
+  var res = x - y;
+  console.log(res, this.name);
+  return res;
+}
+// B.call(A, 40, 30);
+B.call.call.call(A, 40, 30);
+// 最后一个call执行
+//   + this:B.call.call 「call方法」
+// Function.prototype.call(A, 60, 50);
+// Function.prototype.call.call.call(A, 80, 70);
+// 最后一个call执行
+//   + this:Function.prototype.call.call 「call方法」
+
+```

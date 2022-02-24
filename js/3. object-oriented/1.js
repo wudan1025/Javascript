@@ -404,6 +404,7 @@ console.log(obj.getA.call(obj2));
 
 */
 
+/*
 Function.prototype.call = function (context) {
   context = context ? context : window;
   var params = Array.from(arguments).splice(1);
@@ -438,3 +439,60 @@ B.call.call.call(A, 40, 30);
 // Function.prototype.call.call.call(A, 80, 70);
 // 最后一个call执行
 //   + this:Function.prototype.call.call 「call方法」
+
+*/
+
+function Fn(x, y) {
+  let total = x + y;
+  this.x = x;
+  this.y = y;
+  this.say = function () {};
+  return total;
+}
+let f = new Fn(10, 20);
+
+function instanceof_(fn, Object) {
+  var result = false;
+  while (fn.__proto__) {
+    // debugger;
+    // console.log(fn.__proto__);
+    // 不使用 constructor?
+    if (fn.__proto__ == Object.prototype) {
+      result = true;
+      break;
+    }
+
+    fn = fn.__proto__;
+  }
+  return result;
+}
+
+console.log(instanceof_(f, Fn));
+console.log(instanceof_(f, Object));
+console.log(instanceof_([], Array)); //->true
+console.log(instanceof_([], RegExp)); //->false
+console.log(instanceof_([], Object)); //->true
+
+function instance_of(example, Ctor) {
+  let exmType = typeof example,
+    ctorType = typeof Ctor;
+  // 保证Ctor是一个构造函数
+  if (ctorType !== 'function' || !Ctor.prototype)
+    throw new TypeError('Ctor is not a constructor!');
+  // 不处理原始值
+  if (example == null) return false;
+  if (!/^(object|function)$/i.test(exmType)) return false;
+
+  // 优先检测 Symbol.hasInstance
+  if (typeof Ctor[Symbol.hasInstance] === 'function') {
+    return Ctor[Symbol.hasInstance](example);
+  }
+
+  // 没有这个属性，再按照 Ctor.prototype 是否出现在 example 的原型链上检测
+  let prototype = Object.getPrototypeOf(example);
+  while (prototype) {
+    if (prototype === Ctor.prototype) return true;
+    prototype = Object.getPrototypeOf(prototype);
+  }
+  return false;
+}

@@ -107,26 +107,68 @@ let f2 = new Fn; //这样也会把Fn执行，也会创建其实例对象
 > 验证某个实例是否属于这个类
 
 #### instanceof 原理
-> 通过 portotype 找，如果相等 true ？
+> 通过 __proto__ 找，如果相等 true
 
-> todo 错误
+> 方案1 , 不够完善
 ```
+function Fn(x, y) {
+  let total = x + y;
+  this.x = x;
+  this.y = y;
+  this.say = function () {};
+  return total;
+}
+let f = new Fn(10, 20);
+
 function instanceof_(fn, Object) {
   var result = false;
-  while (Object.prototype) {
-    console.log(Object.prototype);
-    if (fn.constructor == Object) {
+  while (fn.__proto__) {
+    // debugger;
+    // console.log(fn.__proto__);
+    // 不使用 constructor?
+    if (fn.__proto__ == Object.prototype) {
       result = true;
       break;
     }
 
-    Object = Object.prototype;
+    fn = fn.__proto__;
   }
   return result;
 }
 
 console.log(instanceof_(f, Fn));
 console.log(instanceof_(f, Object));
+```
+
+> 版本2
+```
+console.log(instanceof_([], Array)); //->true
+console.log(instanceof_([], RegExp)); //->false
+console.log(instanceof_([], Object)); //->true
+
+function instance_of(example, Ctor) {
+  let exmType = typeof example,
+    ctorType = typeof Ctor;
+  // 保证Ctor是一个构造函数
+  if (ctorType !== 'function' || !Ctor.prototype)
+    throw new TypeError('Ctor is not a constructor!');
+  // 不处理原始值
+  if (example == null) return false;
+  if (!/^(object|function)$/i.test(exmType)) return false;
+
+  // 优先检测 Symbol.hasInstance
+  if (typeof Ctor[Symbol.hasInstance] === 'function') {
+    return Ctor[Symbol.hasInstance](example);
+  }
+
+  // 没有这个属性，再按照 Ctor.prototype 是否出现在 example 的原型链上检测
+  let prototype = Object.getPrototypeOf(example);
+  while (prototype) {
+    if (prototype === Ctor.prototype) return true;
+    prototype = Object.getPrototypeOf(prototype);
+  }
+  return false;
+}
 ```
 
 # 5. 判断属性是否在对象上
@@ -291,3 +333,9 @@ Function.prototype.call(fn1);
 Function.prototype.call.call(fn1);
 ```
 
+
+# 9  原型相关方法
+```
+// 获取实例fn的原型对象 等他 fn.__proto__
+Object.getPrototypeOf(fn)
+```
