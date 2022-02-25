@@ -116,6 +116,7 @@ body.addEventListener('click', function () {
 ```
 
 # 4
+> 问题
 ```
 console.log('start');
 let intervalId;
@@ -137,7 +138,24 @@ setTimeout(() => {
 }, 0);
 ```
 
+> 结果
+```
+主线程
+start
+微任务: 微任务产生的微任务执行完
+p1
+p2
+宏任务 
+timeout1
+微任务 ： 当前宏任务产生的微任务
+P3
+p4
+宏任务
+interval
+```
+
 # 5
+> 问题:
 ```
 setTimeout(() => {
     console.log('a');
@@ -156,7 +174,19 @@ Promise.resolve().then(() => {
     console.log(data);
 });
 ```
-
+> 答案
+```
+主线程 空
+微任务: 会将当前微任务产生的微任务也执行完
+在进行下一步
+b
+f
+c
+宏任务1
+a
+宏任务2
+d
+```
 # 6
 ```
 function func1() {
@@ -191,4 +221,31 @@ setTimeout(() => {
     console.log(7);
 }, 0);
 console.log(8);
+```
+
+> 答案
+```
+主线程
+1
+4
+func1 start
+func2 start
+8
+
+微任务
+5
+宏任务
+2
+func1 start
+
+微任务
+3
+
+宏任务
+7
+
+微任务 无
+宏任务
+6
+
 ```
