@@ -1,4 +1,8 @@
 /*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
+/*
  * ES7：generator + promise 的语法糖 async + await
  *   https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function
  */
@@ -26,9 +30,17 @@ console.log(fn()); */
     });
 }
 
-// await:后面应该放置一个promise实例「我们书写的不是，浏览器也会把其变为promise实例」，await中断函数体中，其下面的代码执行「await表达式会暂停整个async函数的执行进程并出让其控制权」；只有等待await后面的promise实例是成功态之后，才会把之前暂停的代码继续执行，如果后面的promise实例是失败的，则下面的代码就不在执行了；
+// await:后面应该放置一个promise实例「我们书写的不是，
+// 浏览器也会把其变为promise实例」，
+// await中断函数体中，其下面的代码执行
+//「await表达式会暂停整个async函数的执行进程并出让其控制权」；
+只有等待await后面的promise实例是成功态之后，
+才会把之前暂停的代码继续执行，
+如果后面的promise实例是失败的，则下面的代码就不在执行了；
 //   + await是异步的微任务
-//   + 函数体中遇到await，后面代码该咋地咋地，但是下面的代码会暂停执行「把他们当做一个任务，放置在EventQueue的微任务队列中」
+//   + 函数体中遇到await，后面代码该咋地咋地，
+但是下面的代码会暂停执行
+「把他们当做一个任务，放置在EventQueue的微任务队列中」
 async function func() {
     // await 1; //-> await Promise.resolve(1);
 
@@ -39,4 +51,3 @@ async function func() {
     console.log(result2);
 }
 func(); */
-

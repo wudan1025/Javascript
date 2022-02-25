@@ -63,7 +63,8 @@ console.log(3); */
     setTimeout(() => {
         resolve('OK');
         // + 改变实例的状态和值「同步」
-        // + 通知之前基于then存放的onfulfilledCallback执行「异步的微任务：也是把执行方法的事情放置在EventQueue中的微任务队列中」
+        // + 通知之前基于then存放的onfulfilledCallback执行
+        「异步的微任务：也是把执行方法的事情放置在EventQueue中的微任务队列中」
         console.log(p);
         console.log(4);
     }, 1000); //=>存储了一个异步的宏任务
@@ -114,7 +115,8 @@ console.log(1); */
 // Promise.reject('no')
 
 
-// 如果onfulfilledCallback/onrejectedCallback不传递，则状态和结果都会“顺延/穿透”到下一个同等状态应该执行的回调函数上「内部其实是自己补充了一些实现效果的默认函数」
+// 如果onfulfilledCallback/onrejectedCallback不传递，
+// 则状态和结果都会“顺延 / 穿透”到下一个同等状态应该执行的回调函数上「内部其实是自己补充了一些实现效果的默认函数」
 /* new Promise((resolve, reject) => {
         // resolve('OK');
         reject('NO');

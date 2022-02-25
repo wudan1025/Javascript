@@ -249,3 +249,161 @@ func1 start
 6
 
 ```
+
+# 7 
+```
+var resolveAfter2Seconds = function resolveAfter2Seconds() {
+  console.log('starting slow promise');
+  return new Promise((resolve) => {
+    setTimeout(function () {
+      resolve('slow');
+      console.log('slow promise is done');
+    }, 2000);
+  });
+};
+
+var resolveAfter1Second = function resolveAfter1Second() {
+  console.log('starting fast promise');
+  return new Promise((resolve) => {
+    setTimeout(function () {
+      console.log('fast promise is done');
+      resolve('fast');
+    }, 1000);
+  });
+};
+
+// 相继的
+// 第一个完全执行完
+// 在执行第二个
+var sequential = async function sequential() {
+  console.log('==SEQUENTIAL START==');
+  const slow = await resolveAfter2Seconds();
+  console.log(slow);
+  const fast = await resolveAfter1Second();
+  console.log(fast);
+};
+// sequential();
+/*
+主线程
+==SEQUENTIAL START==
+starting slow promise
+awite 等待成功
+slow promise is done
+slow
+宏任务为空
+微任务
+starting fast promise
+fast promise is done
+fast
+ */
+
+// x
+// 同时发生 与 concurrentPromise 效果一样
+var concurrent = async function concurrent() {
+  console.log('==CONCURRENT START with await==');
+  // slow 与 fast 为 两个promise 实例
+  // 此时定时器已经执行
+  const slow = resolveAfter2Seconds();
+  const fast = resolveAfter1Second();
+
+  // 获取 reslove 返回结果
+  // 使用 await 先获取 slow 的，在获取 fast 的
+  console.log(await slow);
+  console.log(await fast);
+};
+// concurrent();
+/*
+主线程
+==CONCURRENT START with await
+starting slow promise
+starting fast promise
+// 等待定时器执行结果
+fast promise is done
+slow promise is done
+// await 等待slow reslove
+slow
+// await 等待fast reslove
+fast
+
+*/
+
+// x
+// 同时发生promiseAll, 与 concurrent 效果一样
+var concurrentPromise = function concurrentPromise() {
+  console.log('==CONCURRENT START with Promise.all==');
+  return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()]).then(
+    (messages) => {
+      console.log(messages[0]);
+      console.log(messages[1]);
+    }
+  );
+};
+
+// concurrentPromise();
+/*
+主线程
+==CONCURRENT START with Promise.all==
+starting slow promise
+starting fast promise
+微任务无
+宏任务1 
+fast promise is done
+微任务无
+宏任务2
+slow promise is done
+微任务无
+Promise.all 按数组顺序输出
+slow
+fast
+ */
+
+// x
+var parallel = async function parallel() {
+  console.log('==PARALLEL with await Promise.all==');
+  await Promise.all([
+    (async () => {
+      let result = await resolveAfter2Seconds();
+      console.log(result);
+    })(),
+    (async () => {
+      let result = await resolveAfter1Second();
+      console.log(result);
+    })(),
+  ]);
+};
+parallel();
+/*
+主线程
+==PARALLEL with await Promise.all==
+执行all第一个函数
+starting slow promise
+执行all第二个函数
+starting fast promise
+// fast 先返回
+fast promise is done
+fast
+// slow 后返回
+slow promise is done
+slow
+*/
+
+var parallelPromise = function parallelPromise() {
+  console.log('==PARALLEL with Promise.then==');
+  resolveAfter2Seconds().then((message) => console.log(message));
+  resolveAfter1Second().then((message) => console.log(message));
+};
+/*
+主线程
+==PARALLEL with Promise.then==
+starting slow promise
+starting fast promise
+宏任务
+fast promise is done
+此次宏任务触发的微任务
+fast
+宏任务
+slow promise is done
+此次宏任务触发的微任务
+slow
+ */
+```

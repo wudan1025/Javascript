@@ -14,7 +14,10 @@
  *   「把它作为一个构造函数 prototype」
  *      生成器函数不能被new执行  Uncaught TypeError: func is not a constructor
  *      当做普通函数执行，返回的结果就是生成器函数的一个实例
- *      itor.__proto__ -> func.prototype「空对象，没有constructor」 -> Generator.prototype「constructor:GeneratorFunction」{next/return/throw/Symbol(Symbol.toStringTag): "Generator"} -> 一个具备迭代器规范的对象「Symbol(Symbol.iterator)」 -> Object.prototype
+ *      itor.__proto__ -> func.prototype「空对象，没有constructor」 
+ * -> Generator.prototype「constructor:GeneratorFunction」
+ * {next/return/throw/Symbol(Symbol.toStringTag): "Generator"} -> 
+ * 一个具备迭代器规范的对象「Symbol(Symbol.iterator)」 -> Object.prototype
  */
 
 /* function* func() {

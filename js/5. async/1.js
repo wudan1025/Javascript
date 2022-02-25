@@ -108,6 +108,7 @@ Promise.resolve()
   });
 */
 
+/*
 function func1() {
   console.log('func1 start');
   return new Promise((resolve) => {
@@ -140,3 +141,56 @@ setTimeout(() => {
   console.log(7);
 }, 0);
 console.log(8);
+*/
+
+/*
+new Promise((resolve) => {
+  console.log('promise1');
+  resolve();
+})
+  .then(() => {
+    console.log('then11');
+    // return
+    new Promise((resolve) => {
+      console.log('promise2');
+      resolve();
+    })
+      .then(() => {
+        console.log('then21');
+      })
+      .then(() => {
+        console.log('then22');
+      });
+  })
+  .then(() => {
+    console.log('then12');
+  }); 
+  */
+
+/*
+async function fn() {
+  return 10;
+}
+console.log(fn());
+*/
+
+/*
+function api(interval) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve(interval);
+      reject();
+    }, interval);
+  });
+}
+
+async function func() {
+  let result1 = await api(1000);
+  console.log(result1);
+  let result2 = await api(3000);
+  console.log(result2);
+}
+
+func();
+*/
+

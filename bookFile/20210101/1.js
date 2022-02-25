@@ -16,7 +16,9 @@
     console.log('then12');
 }); */
 
-// Promise.all([promise数组:{要求数组中的每一项尽可能都是promise实例}])：返回一个新的promise实例AA，AA成功还是失败，取决于数组中的每一个promise实例是成功还是失败，只要有一个是失败，AA就是失败的，只有都成功AA才是成功的
+// Promise.all([promise数组:{要求数组中的每一项尽可能都是promise实例}])：
+// 返回一个新的promise实例AA，AA成功还是失败，取决于数组中的每一个promise实例是成功还是失败，
+// 只要有一个是失败，AA就是失败的，只有都成功AA才是成功的
 // Promise.race：最先知道状态的promise实例，是成功还是失败，决定了AA是成功还是失败
 
 /* function fn(interval) {
