@@ -104,3 +104,54 @@ p3.then(
 );
 console.log(1);
 ```
+
+# 生成器函数相关
+> generator function, 可以单步执行
+
+> 生成器函数是 GeneratorFunction 的实例，生成器函数。__proto__===GeneratorFunction.prototype -> GeneratorFunction.prototype.__proto__===Function.prototype
+
+> ({}).toString.call(生成器函数) => "[object GeneratorFunction]"
+
+> 不能被new执行,当做普通函数执行，返回的结果就是生成器函数的一个实例
+
+```
+function* func() {
+    console.log(1);
+    return 2;
+}
+let itor = func();
+console.log(itor.next()); //->{done:true,value:2}
+console.log(itor.next()); //->{done:true,value:undefined} 
+```
+> yield
+```
+// 每一次执行next，遇到yield会暂停函数的执行
+//   + done
+//   + value -> yield后面的值
+/* function* func() {
+    console.log('A');
+    yield 1;
+
+    console.log('B');
+    yield 2;
+
+    console.log('C');
+    yield 3;
+
+    console.log('D');
+    return 4;
+}
+let itor = func(); */
+
+/* console.log(itor.next()); //->{done:false,value:1}
+console.log(itor.next()); //->{done:false,value:2}
+console.log(itor.next()); //->{done:false,value:3}
+console.log(itor.next()); //->{done:true,value:4}
+console.log(itor.next()); //->{done:true,value:undefined} */
+
+/* console.log(itor.next()); //->{done:false,value:1}
+console.log(itor.next()); //->{done:false,value:2}
+console.log(itor.return(10)); //->{done:true,value:10}  把生成器内部的执行直接停止，让done变为true「throw直接抛异常，下面代码都不执行了」
+console.log(itor.next()); //->{done:true,value:undefined}
+console.log(itor.next()); //->{done:true,value:undefined} */
+```
