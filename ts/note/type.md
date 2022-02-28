@@ -1,12 +1,13 @@
-/*
+<!--
  * @LastEditors: wudan01
  * @description: 文件描述
- */
+-->
 
-// never 用于永远不会出现的场景
+# 1. never
+> 永远不会出现的类型
 
-// 收窄的过程
-
+> 出现在 错误路径 的错误提示 / 死循环 等错误提示场景
+```
 var strOrNum: string | number = 'foo';
 
 if (typeof strOrNum === 'string') {
@@ -17,3 +18,4 @@ if (typeof strOrNum === 'string') {
   const _exhaustiveCheck: never = strOrNum;
   throw new Error(`Unknown input type: ${_exhaustiveCheck}`);
 }
+```
