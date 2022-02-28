@@ -19,6 +19,7 @@ function Promise(executor) {
     throw new Error('cb 不是function');
   }
 
+  var self = this
   this.state = 'pending';
   this.result = undefined;
 
@@ -34,31 +35,58 @@ function Promise(executor) {
   };
 
   // 回调执行 导致状态变化
-  executor(this.reject, this.resolve);
+  executor(this.resolve, this.reject);
 
   stateChange = function (state, result) {
-    this.state = state;
+    self.state = state;
     // 成功
-    if (this.state == 'fullfilled') {
-      this.result = result;
-      for (let i = 0; i < this.onFulfilledCallbacks; i++) {
+    if (self.state == 'fullfilled') {
+      self.result = result;
+      for (let i = 0; i < self.onFulfilledCallbacks.length; i++) {
         setTimeout(function () {
-          result = this.onFulfilledCallbacks[i](result);
+          result = self.onFulfilledCallbacks[i](result);
         }, 0);
       }
     }
-    if (this.state == 'rejected') {
-      for (let i = 0; i < this.onRejctCallbacks; i++) {
+    if (self.state == 'rejected') {
+      for (let i = 0; i < self.onRejctCallbacks.length; i++) {
         setTimeout(function () {
-          this.onRejctCallbacks[i]();
+          self.onRejctCallbacks[i]();
         }, 0);
       }
     }
   };
 }
 
-Promise.prototype.then = function (cb) {
-  Promise.onFulfilledCallbacks.push(cb);
+// 
+Promise.prototype.then = function (onfulfilled, onrejected) {
+  if (typeof onfulfilled != 'function') {
+    onfulfilled = function onfulfilled(result) {
+      return result;
+    };
+  }
+
+  if (typeof onrejected !== "function") {
+    onrejected = function onrejected(reason) {
+      throw reason;
+    };
+  }
+  var self = this
+  switch (self.state) {
+    case 'fulfilled':
+    // 如果已经成功，执行成功回调
+    // todo
+    case 'rejected':
+    // 如果已经失败，执行失败回调
+    // todo
+    default:
+      // pending 状态 
+      self.onFulfilledCallbacks.push(onfulfilled);
+      self.onRejectedCallbacks.push(onrejected);
+
+  }
+
+  this.onFulfilledCallbacks.push(cb);
 };
 
 var p = new Promise(function (resolve, reject) {
