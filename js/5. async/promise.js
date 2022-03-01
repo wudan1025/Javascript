@@ -109,7 +109,8 @@
     if (typeof window !== "undefined") {
         // window.Promise = Promise;
     }
-    if (typeof module === "object" && typeof module.exports === "object") {
+    if (typeof module === "object"
+        && typeof module.exports === "object") {
         // module.exports = Promise;
     }
 
