@@ -5,7 +5,7 @@
 # 1. 微任务/宏任务都有什么
 
 # 2. 手动创建一个微任务
-# 2. async/await
+# 3. async/await
 #### async
 > async 表示函数是异步的，函数体内有异步方法
 > 将返回值包装为promise返回
@@ -60,8 +60,12 @@ func();
 ```
 
 
-# promise 相关
+# 4. promise 相关
 
+#### Promise.reslove() 及 Prmise.reject() 作用
+###### Promise.reslove()
+> Promise.reslove(value),将 value 包装为 promise 返回
+> 具体参考  https://www.cnblogs.com/qianxiaox/p/14124551.html 补充
 #### promise then 返回值
 ```
 let p1 = new Promise((resolve, reject) => {
