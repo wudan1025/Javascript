@@ -63,6 +63,7 @@ class Promise {
         throw reason;
       };
     }
+
     switch (this.state) {
       case 'fullfilled':
         // 如果已经成功，执行成功回调
@@ -82,15 +83,46 @@ class Promise {
         this.onRejectedCallbacks.push(onrejected);
     }
   }
+
   catch() {}
+
+  // todo
+  static all(arr) {
+    // let result = [];
+    // arr.forEach((element, index) => {
+    //   result[idx] = element();
+    //   console.log(element);
+    // });
+    // return result;
+  }
+
+  static race() {}
+
+  // resolve 状态的promise
+  // 将 value 变为 promise 返回
+  static resolve(value) {
+    return new Promise(function (resolve, reject) {
+      resolve(value);
+    });
+  }
+
+  // 返回 reject 状态的 promise
+  static reject(reason) {
+    return new Promise(function (resolve, reject) {
+      reject(reason);
+    });
+  }
 }
 
+/*
 var p1 = new Promise(function (resolve, reject) {
   resolve('yes');
   // reject('NO');
 });
 
-p1.then(
+console.log(p1);
+
+let p2 = p1.then(
   function (result) {
     console.log('成功', result);
   },
@@ -98,3 +130,23 @@ p1.then(
     console.log('失败', reason);
   }
 );
+
+console.log(p2);
+*/
+
+// https://www.cnblogs.com/qianxiaox/p/14124551.html
+// Promise.resolve 作用
+
+console.log(Promise.resolve('a'));
+Promise.resolve('a').then(function (a) {
+  console.log(a);
+  console.log('Promise.resolve().then');
+});
+
+// Promise.reject 作用
+Promise.reject('error').then(null, function (reason) {
+  console.log(reason);
+  console.log('Promise.reject().then');
+});
+
+// console.log(Promise);
