@@ -4,18 +4,25 @@ let num: number | undefined | null = 123
 let str: string = 'abc'
 // str = 123
 
-// 数组
+// 数组 
 let arr1: number[] = [1, 2, 3]
+
+// Array ts 预先定义的泛型接口
+// number | string 联合类型
 let arr2: Array<number | string> = [1, 2, 3, '4']
 
 // 元组
+// 特殊的数组，限制了数组的类型，个数
 let tuple: [number, string] = [0, '1']
-// tuple.push(2)
+// 实际开发过程中 不建议使用
+// 可以插入
+// tuple.push(2) 
 // console.log(tuple)
+// 无法访问
 // tuple[2]
 
 // 函数
-let add = (x: number, y: number) => x + y
+let add3 = (x: number, y: number) => x + y
 let compute: (x: number, y: number) => number
 compute = (a, b) => a + b
 
@@ -35,18 +42,18 @@ num = undefined
 num = null
 
 // void
-let noReturn = () => {}
+let noReturn = () => { }
 
 // any
 let x
 x = 1
 x = []
-x = () => {}
+x = () => { }
 
 // never
 let error = () => {
     throw new Error('error')
 }
 let endless = () => {
-    while(true) {}
+    while (true) { }
 }
