@@ -22,18 +22,22 @@ let tuple: [number, string] = [0, '1']
 // tuple[2]
 
 // 函数
+// 增加类型注解
 let add3 = (x: number, y: number) => x + y
+
+// compute 函数类型
 let compute: (x: number, y: number) => number
 compute = (a, b) => a + b
 
 // 对象
-let obj: { x: number, y: number } = { x: 1, y: 2 }
-obj.x = 3
+let obj3: { x: number, y: number } = { x: 1, y: 2 }
+obj3.x = 3
 
 // symbol
+// 警告？
 let s1: symbol = Symbol()
 let s2 = Symbol()
-// console.log(s1 === s2)
+console.log(s1 === s2)
 
 // undefined, null
 let un: undefined = undefined
@@ -50,10 +54,15 @@ x = 1
 x = []
 x = () => { }
 
-// never
+// 函数 返回类型 为 never
 let error = () => {
     throw new Error('error')
 }
+
+// 函数 返回类型 为 never
+// 死循环永远不会有返回值
 let endless = () => {
     while (true) { }
 }
+
+

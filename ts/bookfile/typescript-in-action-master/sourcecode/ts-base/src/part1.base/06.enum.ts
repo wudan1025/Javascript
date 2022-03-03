@@ -9,6 +9,8 @@ enum Role {
 // console.log(Role.Reporter)
 // console.log(Role)
 
+// 06-01:09 分钟
+
 // 字符串枚举
 enum Message {
     Success = '恭喜你，成功了',
