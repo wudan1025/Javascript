@@ -255,4 +255,19 @@
   if (typeof window !== 'undefined') window.Promise = Promise;
   if (typeof module === 'object' && typeof module.exports === 'object')
     module.exports = Promise;
+
+  var p1 = new Promise(function (resolve, reject) {
+    // setTimeout(() => {
+    resolve('yes');
+    // }, 2000);
+    // reject('NO');
+  });
+  p1.then(function (result) {
+    console.log('成功', result);
+  }).then(function (result) {
+    console.log('成功', result);
+  });
+  // p1.then(null, function (reason) {
+  //   console.log('失败', reason);
+  // });
 })();

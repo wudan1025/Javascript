@@ -86,17 +86,52 @@ class Promise {
 
   catch() {}
 
-  // todo
+  // 返回所有结果，如果失败 返回失败的那一个
   static all(arr) {
-    // let result = [];
-    // arr.forEach((element, index) => {
-    //   result[idx] = element();
-    //   console.log(element);
-    // });
-    // return result;
+    let allResult = [],
+      len = arr.length,
+      resolveLen = 0;
+    return new Promise(function (resolve, reject) {
+      arr.forEach((element, index) => {
+        element.then(
+          (result) => {
+            resolveLen++;
+            allResult[index] = result;
+            if (resolveLen == len) {
+              resolve(allResult);
+            }
+          },
+          (reason) => {
+            reject(reason);
+          }
+        );
+      });
+    });
   }
 
-  static race() {}
+  // 返回最先完成的 promise 结果，reslove or reject
+  static race(arr) {
+    let hasReturn = false;
+    return new Promise(function (resolve, reject) {
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].then(
+          (result) => {
+            if (!hasReturn) resolve(result);
+            hasReturn = true;
+          },
+          (reason) => {
+            if (!hasReturn) reject(reason);
+            hasReturn = true;
+          }
+        );
+        if (hasReturn) {
+          break;
+        }
+      }
+    });
+  }
+
+  static any()
 
   // resolve 状态的promise
   // 将 value 变为 promise 返回
@@ -114,26 +149,48 @@ class Promise {
   }
 }
 
-/*
 var p1 = new Promise(function (resolve, reject) {
-  resolve('yes');
-  // reject('NO');
+  // resolve('yes1');
+  reject('NO1');
 });
 
-console.log(p1);
+var p2 = new Promise(function (resolve, reject) {
+  resolve('yes2');
+  // reject('NO2');
+});
 
-let p2 = p1.then(
-  function (result) {
-    console.log('成功', result);
+// Promise.all([p1, p2]).then(
+//   (result) => {
+//     console.log(result);
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
+
+Promise.race([p1, p2]).then(
+  (result) => {
+    console.log(result);
   },
-  function (reason) {
-    console.log('失败', reason);
+  (error) => {
+    console.log(error);
   }
 );
 
-console.log(p2);
-*/
+// console.log(p1);
 
+// let p2 = p1.then(
+//   function (result) {
+//     console.log('成功', result);
+//   },
+//   function (reason) {
+//     console.log('失败', reason);
+//   }
+// );
+
+// console.log(p2);
+
+/*
 // https://www.cnblogs.com/qianxiaox/p/14124551.html
 // Promise.resolve 作用
 
@@ -148,5 +205,5 @@ Promise.reject('error').then(null, function (reason) {
   console.log(reason);
   console.log('Promise.reject().then');
 });
-
+*/
 // console.log(Promise);

@@ -133,7 +133,7 @@ Promise.prototype.then = function (onfulfilled, onrejected) {
 
 var p1 = new Promise(function (resolve, reject) {
   setTimeout(() => {
-    resolve('yes');
+    resolve('yes123');
   }, 2000);
   // reject('NO');
 });
