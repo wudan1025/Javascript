@@ -11,7 +11,7 @@ Object.defineProperty(obj, 'b', {
 });
 
 Object.defineProperty(obj, 'a', {
-  get: function () {
+  set: function () {
     if (obj.b) {
       obj.b += 1;
     }

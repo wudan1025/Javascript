@@ -86,13 +86,18 @@ class Promise {
 
   catch() {}
 
-  // 返回所有结果，如果失败 返回失败的那一个
+  // 返回所有结果，
+  // 全部成功，返回成功结果
+  // 如果失败 返回失败的那一个
   static all(arr) {
     let allResult = [],
       len = arr.length,
       resolveLen = 0;
     return new Promise(function (resolve, reject) {
       arr.forEach((element, index) => {
+        if (!(element instanceof Promise)) {
+          element = Promise.resolve(element);
+        }
         element.then(
           (result) => {
             resolveLen++;
@@ -109,11 +114,46 @@ class Promise {
     });
   }
 
-  // 返回最先完成的 promise 结果，reslove or reject
+  // all 反过来，
+  // 有成功的，返回第一个成功的，
+  // 全部失败，返回失败
+  static any(arr) {
+    let hasReturn = false,
+      rejectLen = 0,
+      arrLen = arr.length;
+    return new Promise(function (resolve, reject) {
+      for (let i = 0; i < arr.length; i++) {
+        if (!(arr[i] instanceof Promise)) {
+          arr[i] = Promise.resolve(arr[i]);
+        }
+        arr[i].then(
+          (result) => {
+            if (!hasReturn) resolve(result);
+            hasReturn = true;
+          },
+          (reason) => {
+            rejectLen++;
+            if (rejectLen == arrLen) {
+              reject(reason);
+            }
+          }
+        );
+        if (hasReturn) {
+          break;
+        }
+      }
+    });
+  }
+
+  // 返回最先完成的 promise 结果，
+  // 成功或失败都返回
   static race(arr) {
     let hasReturn = false;
     return new Promise(function (resolve, reject) {
       for (let i = 0; i < arr.length; i++) {
+        if (!(arr[i] instanceof Promise)) {
+          arr[i] = Promise.resolve(arr[i]);
+        }
         arr[i].then(
           (result) => {
             if (!hasReturn) resolve(result);
@@ -130,8 +170,6 @@ class Promise {
       }
     });
   }
-
-  static any()
 
   // resolve 状态的promise
   // 将 value 变为 promise 返回
@@ -150,8 +188,8 @@ class Promise {
 }
 
 var p1 = new Promise(function (resolve, reject) {
-  // resolve('yes1');
-  reject('NO1');
+  resolve('yes1');
+  // reject('NO1');
 });
 
 var p2 = new Promise(function (resolve, reject) {
@@ -159,7 +197,20 @@ var p2 = new Promise(function (resolve, reject) {
   // reject('NO2');
 });
 
-// Promise.all([p1, p2]).then(
+// p1.then((result) => {
+//   console.log(result);
+// });
+
+Promise.all(['a', p1, p2]).then(
+  (result) => {
+    console.log(result);
+  },
+  (error) => {
+    console.log(error);
+  }
+);
+
+// Promise.race([p1, p2]).then(
 //   (result) => {
 //     console.log(result);
 //   },
@@ -168,14 +219,14 @@ var p2 = new Promise(function (resolve, reject) {
 //   }
 // );
 
-Promise.race([p1, p2]).then(
-  (result) => {
-    console.log(result);
-  },
-  (error) => {
-    console.log(error);
-  }
-);
+// Promise.any([p1, p2]).then(
+//   (result) => {
+//     console.log(result);
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
 
 // console.log(p1);
 
