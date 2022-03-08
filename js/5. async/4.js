@@ -47,8 +47,12 @@
 
   /* 原型部分 */
   var resolvePromise = function resolvePromise(promise, x, resolve, reject) {
+    debugger;
     if (promise === x)
       throw new TypeError('Chaining cycle detected for promise #<Promise>');
+    console.log(typeof x);
+    console.log(/^(object|function)$/i.test(typeof x));
+    // 如果是 function 或 object 进入判断
     if (x !== null && /^(object|function)$/i.test(typeof x)) {
       var then;
       try {
@@ -80,6 +84,7 @@
         return;
       }
     }
+    // 否则直接返回 promise
     resolve(x);
   };
   Promise.prototype = {
@@ -264,9 +269,14 @@
   });
   p1.then(function (result) {
     console.log('成功', result);
-  }).then(function (result) {
-    console.log('成功', result);
+    return 123;
   });
+  // .then(function (result) {
+  //   console.log('成功', result);
+  // })
+  // .then(function (result) {
+  //   console.log('成功', result);
+  // });
   // p1.then(null, function (reason) {
   //   console.log('失败', reason);
   // });
