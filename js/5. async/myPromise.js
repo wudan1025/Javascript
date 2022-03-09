@@ -1,3 +1,4 @@
+// mn 版本
 class MyPromise {
   constructor(executor) {
     // 初始化状态和值
