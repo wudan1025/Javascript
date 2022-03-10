@@ -1,4 +1,5 @@
 // 函数定义
+// 4 种方法
 function add1(x: number, y: number) {
     return x + y
 }
@@ -13,10 +14,13 @@ interface add4 {
 
 add1(1, 2, 3)
 
+// y? 表示可选参数
+// 可选参数要在必选参数之后
 function add5(x: number, y?: number) {
     return y ? x + y : x
 }
 add5(1)
+
 
 function add6(x: number, y = 0, z: number, q = 1) {
     return x + y + z + q
@@ -28,6 +32,7 @@ function add7(x: number, ...rest: number[]) {
 }
 add7(1, 2, 3, 4, 5)
 
+// 函数重载
 function add8(...rest: number[]): number;
 function add8(...rest: string[]): string;
 function add8(...rest: any[]) {
