@@ -1,13 +1,23 @@
+//
+/*
+www.jianshu.com/p/639732c12f64
+枚举笔记 支持数组和字符串枚举，不支持对象
+用对象会有奇怪的现象不推荐 
+见 https://www.cnblogs.com/luo1240465012/p/15005491.html
+
+*/
+
 // 数字枚举
 enum Role {
-    Reporter = 1,
-    Developer,
-    Maintainer,
-    Owner,
-    Guest
+  Reporter = 2,
+  Developer,
+  Maintainer,
+  Owner,
+  Guest,
 }
 // 枚举被编译为对象
 // 映射？？？todo
+/*
 var Role;
 (function (Role) {
     Role[Role["Reporter"] = 1] = "Reporter";
@@ -17,41 +27,51 @@ var Role;
     Role[Role["Guest"] = 5] = "Guest";
 })(Role || (Role = {}));
 
-
-
-// 06-01:09 分钟
+//  得到结果
+{
+1: "Reporter"
+2: "Developer"
+3: "Maintainer"
+4: "Owner"
+5: "Guest"
+Developer: 2
+Guest: 5
+Maintainer: 3
+Owner: 4
+Reporter: 1
+}
+*/
 
 // 字符串枚举
 enum Message {
-    Success = '恭喜你，成功了',
-    Fail = '抱歉，失败了'
+  Success = '恭喜你，成功了',
+  Fail = '抱歉，失败了',
 }
 
 var Message;
 (function (Message) {
-    Message["Success"] = "\u606D\u559C\u4F60\uFF0C\u6210\u529F\u4E86";
-    Message["Fail"] = "\u62B1\u6B49\uFF0C\u5931\u8D25\u4E86";
+  Message['Success'] = '\u606D\u559C\u4F60\uFF0C\u6210\u529F\u4E86';
+  Message['Fail'] = '\u62B1\u6B49\uFF0C\u5931\u8D25\u4E86';
 })(Message || (Message = {}));
-
 
 // 异构枚举
 // 混合使用
 enum Answer {
-    N,
-    Y = 'Yes'
+  N,
+  Y = 'Yes',
 }
 
 // 枚举成员
 // Role.Reporter = 0
 enum Char {
-    // const member
-    a,
-    b = Char.a,
-    c = 1 + 3,
-    // computed member
-    d = Math.random(),
-    e = '123'.length,
-    f = 4
+  // const member
+  a,
+  b = Char.a,
+  c = 1 + 3,
+  // computed member
+  d = Math.random(),
+  e = '123'.length,
+  f = 4,
 }
 /*
 var Char;
@@ -71,33 +91,41 @@ var Char;
 // 编辑阶段会被移除
 // 不需要对象，而需要对象的值
 const enum Month {
-    Jan,
-    Feb,
-    Mar,
-    Apr = Month.Mar + 1,
-    // May = () => 5
+  Jan,
+  Feb,
+  Mar,
+  Apr = Month.Mar + 1,
+  // May = () => 5
 }
-let month = [Month.Jan, Month.Feb, Month.Mar]
+let month = [Month.Jan, Month.Feb, Month.Mar];
 
 // 枚举类型
 // 加入笔记 中，枚举类型的使用方法
 // 枚举的作用，常量，不会改变的量抽离出来
-enum E { a, b }
-enum F { a = 0, b = 1 }
-enum G { a = 'apple', b = 'banana' }
+enum E {
+  a,
+  b,
+}
+enum F {
+  a = 0,
+  b = 1,
+}
+enum G {
+  a = 'apple',
+  b = 'banana',
+}
 
-let e: E = 3
-let f: F = 3
+let e: E = 3;
+let f: F = 3;
 // console.log(e === f)
 
-let e1: E.a = 3
-let e2: E.b = 3
-let e3: E.a = 3
+let e1: E.a = 3;
+let e2: E.b = 3;
+let e3: E.a = 3;
 // 不能进行比较
 // console.log(e1 === e2)
 // 可以比较
 // console.log(e1 === e3)
 
-let g1: G = G.a
-let g2: G.a = G.a
-
+let g1: G = G.a;
+let g2: G.a = G.a;
