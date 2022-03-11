@@ -14,13 +14,15 @@ class JavaScript {
     js: any
 }
 
+// is 是什么语法
 function isJava(lang: Java | JavaScript): lang is Java {
     return (lang as Java).helloJava !== undefined
 }
 
 function getLanguage(type: Type, x: string | number) {
     let lang = type === Type.Strong ? new Java() : new JavaScript();
-    
+
+    // 类型保护的几种方式
     if (isJava(lang)) {
         lang.helloJava();
     } else {
@@ -59,3 +61,6 @@ function getLanguage(type: Type, x: string | number) {
 }
 
 getLanguage(Type.Week, 1)
+
+
+// 看到18 ts 高级类型
