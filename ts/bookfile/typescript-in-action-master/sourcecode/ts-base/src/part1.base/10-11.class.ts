@@ -11,7 +11,6 @@ abstract class Animal {
     eat() {
         console.log('eat')
     }
-    // 抽象方法 todo???
     // 需要在子类中实现
     abstract sleep(): void
 }
