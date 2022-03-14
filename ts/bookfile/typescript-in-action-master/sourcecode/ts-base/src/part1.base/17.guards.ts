@@ -62,5 +62,3 @@ function getLanguage(type: Type, x: string | number) {
 
 getLanguage(Type.Week, 1)
 
-
-// 看到18 ts 高级类型
