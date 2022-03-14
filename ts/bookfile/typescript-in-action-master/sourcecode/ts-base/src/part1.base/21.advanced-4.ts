@@ -47,4 +47,4 @@ type T5 = NotNull<string | number | undefined | null>
 type T6 = Extract<"a" | "b" | "c", "a" | "e">
 
 // ReturnType<T> 获取函数返回值类型
-type T8 = ReturnType<() => any>
+type T8 = ReturnType<() => string>
