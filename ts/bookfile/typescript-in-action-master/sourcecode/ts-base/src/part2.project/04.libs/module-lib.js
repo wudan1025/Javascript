@@ -1,3 +1,4 @@
+// 模块类库
 const version = '1.0.0';
 
 function doSomething() {

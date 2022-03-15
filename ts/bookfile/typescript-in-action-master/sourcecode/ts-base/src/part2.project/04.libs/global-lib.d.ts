@@ -1,3 +1,7 @@
+// 全局库声明文件
+
+// declare
+
 declare function globalLib(options: globalLib.Options): void;
 
 declare namespace globalLib {

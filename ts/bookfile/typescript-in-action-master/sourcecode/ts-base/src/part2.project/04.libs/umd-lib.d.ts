@@ -3,6 +3,7 @@ declare namespace umdLib {
     function doSomething(): void
 }
 
+// umd 库不可缺少
 export as namespace umdLib
 
 export = umdLib
