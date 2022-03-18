@@ -1,9 +1,15 @@
+// 工程引用
 {
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
     "strict": true,
+    // 可以被引用，并且支持增量编译
     "composite": true,
     "declaration": true
   }
 }
+// 构建
+//  tsv -b src/server --verbose
+// tsv -b src/clent --verbose
+//  tsv -b src/test --verbose
