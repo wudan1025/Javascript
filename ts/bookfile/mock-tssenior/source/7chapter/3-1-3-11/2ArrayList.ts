@@ -3,7 +3,10 @@
 // 其中需求中的remove方法有两个，我们用方法重载来实现
 //let s:Array<string>=["df",2]
 // 泛型的any化
-// 泛型的默认值的问题 
+// 泛型的默认值的问题
+
+// 不初始化，是 any / unkonw 类型
+// T = {} 泛型的初始化 为 对象类型 笔记
 class ArrayList<T = {}> {
   //第一步：定义一个引用属性【数组】
   public element: Array<T>
@@ -68,7 +71,8 @@ console.log(arrayList.get(0));
 let arrayList2 = new ArrayList();
 arrayList2.add(3)
 
-//let arrayList3 = new ArrayList<typeof stuOne>();
+// todo 未知类型的定义
+// let arrayList3 = new ArrayList<typeof stuOne>();
 let arrayList3 = new ArrayList<stuType>();
 arrayList3.add(stuOne)
 arrayList3.add(stuTwo)

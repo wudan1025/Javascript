@@ -13,6 +13,7 @@
 
 */
 
+
 interface DecodeOptions {
     complete?: boolean | undefined;
     json?: boolean | undefined;
@@ -29,8 +30,16 @@ interface JsonInter {
 }
 
 
-interface JwtHeader {
-    alg: string | Algorithm;
-    typ?: string | undefined;
-    // ...其他key-value省略
+export interface Jwt {
+    header: JwtHeader;
+    payload: JwtPayload;
+    signature: string;
+}
+// S100
+export function decode(token: string, options: DecodeOptions & { complete: true, json: true }): Jwt;
+export function decode(token: string, options: DecodeOptions & { json: true }): null | JwtPayload;
+export function decode(token: string, options?: DecodeOptions): null | JwtPayload | string {
+    let data: any
+    // 代码实现省略....
+    return data
 }
