@@ -2,7 +2,7 @@ import Order from '../9keyof/Order';
 import OrderDetail from '../9keyof/OrderDetail';
 
 class ObjectImpl<T extends object, K extends keyof T>{
-  object!: T;
+  object!: T;// !左右强行推断？
   key!: K
   constructor(object_: T, key_: K) {
     this.object = object_;
@@ -25,10 +25,11 @@ let result = order.orderDetailArray;
 console.log("result:", result)
 
 //let objectImpl = new ObjectImpl<Order, "orderDetailArray">(order, "orderDetailArray");
+// 简化写法，类型推断
 let objectImpl = new ObjectImpl(order, "orderDetailArray");
 
 console.log("objectImpl.getValue():", objectImpl.getValue());
-objectImpl.getValue().forEach((orderDetail)=>{
+objectImpl.getValue().forEach((orderDetail) => {
   console.log(orderDetail.productname);
 })
 

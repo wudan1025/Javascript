@@ -11,7 +11,8 @@ export default class Order {
 
 }
 
-type OrderDetailType = Order["orderDetailArray"] 
+// 当前属性类型 = 类[属性名]  笔记
+type OrderDetailType = Order["orderDetailArray"]
 
 let orderDetailOne = new OrderDetail(10, "电视机", 5000, 3);
 let orderDetailTwo = new OrderDetail(11, "桌子", 2000, 2);
