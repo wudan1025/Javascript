@@ -1,15 +1,18 @@
 interface People {
   username: string, age: number, address: string, phone: string
 }
+// 不完全相同，一个是另一个子集
 
 class Stu {
-  public username!: string
+  // 没有username 也没问题todo?
+  // public username!: string
   public age!: number;
   public address!: string// 类型 "Stu" 中缺少属性 "address"，但类型 "typestu2" 中需要该属性。t
   public phone!: string
-  public kk() {
+  // 有 kk 有问题？
+  // public kk() {
 
-  }
+  // }
   // get value() {
 
   //   return this.username

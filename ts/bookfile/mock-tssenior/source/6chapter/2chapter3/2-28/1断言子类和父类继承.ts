@@ -36,12 +36,14 @@ class Stu extends People {
 
 let people = new People()
 
+// 断言 as 左侧是 对象变量 ,as 右侧是 类型
+// 改变数据类型
 //let result = people as Stu;// 类型断言 正确
 let result = <Stu>people;// 类型转换 正确
 result.study();
 
 let stu = new Stu("wangwu", 23, "北京", "123")
-let result2=stu as People;// 正确
+let result2 = stu as People;// 正确
 
 
 export { }

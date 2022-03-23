@@ -1,3 +1,5 @@
+// type 可以定义多个 类似interface
+// type 可以定义方法吗？
 type People = {
   username: string, age: number, address: string, phone: string
 }
