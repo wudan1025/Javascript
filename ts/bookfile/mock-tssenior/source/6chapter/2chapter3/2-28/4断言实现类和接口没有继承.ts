@@ -1,18 +1,22 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 interface People {
-  username: string, age: number, address: string, phone: string
+  username: string;
+  age: number;
+  address: string;
+  phone: string;
 }
 // 不完全相同，一个是另一个子集
 
 class Stu {
-  // 没有username 也没问题todo?
-  // public username!: string
+  // public username!: string;
   public age!: number;
-  public address!: string// 类型 "Stu" 中缺少属性 "address"，但类型 "typestu2" 中需要该属性。t
-  public phone!: string
+  public address!: string; // 类型 "Stu" 中缺少属性 "address"，但类型 "typestu2" 中需要该属性。t
+  public phone!: string;
   // 有 kk 有问题？
-  // public kk() {
-
-  // }
+  // public kk() {}
   // get value() {
 
   //   return this.username
@@ -27,12 +31,15 @@ class Stu {
   }
 }
 
+let people: People = {
+  username: 'wangwu',
+  age: 23,
+  address: '11',
+  phone: '111',
+};
+let result = people as Stu; //正确
 
-let people: People = { username: "wangwu", age: 23, address: "11", phone: "111" }
-let result = people as Stu;//正确
+let stu = new Stu('wangwu', 23, '北京');
+stu as People; // 正确
 
-let stu = new Stu("wangwu", 23, "北京")
-stu as People;// 正确
-
-
-export { }
+export {};

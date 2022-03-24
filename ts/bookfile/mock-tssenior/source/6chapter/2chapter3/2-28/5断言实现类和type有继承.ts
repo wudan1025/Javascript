@@ -1,14 +1,21 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 // type 可以定义多个 类似interface
-// type 可以定义方法吗？
+
 type People = {
-  username: string, age: number, address: string, phone: string
-}
+  username: string;
+  age: number;
+  address: string;
+  phone: string;
+};
 
 class Stu implements People {
-  public username!: string
+  public username!: string;
   public age!: number;
-  public address!: string// 类型 "Stu" 中缺少属性 "address"，但类型 "typestu2" 中需要该属性。t
-  public phone!: string
+  public address!: string; // 类型 "Stu" 中缺少属性 "address"，但类型 "typestu2" 中需要该属性。t
+  public phone!: string;
   // get value() {
 
   //   return this.username
@@ -23,12 +30,15 @@ class Stu implements People {
   }
 }
 
+let people: People = {
+  username: 'wangwu',
+  age: 23,
+  address: '11',
+  phone: '111',
+};
+let result = people as Stu; //正确
 
-let people: People = { username: "wangwu", age: 23, address: "11", phone: "111" }
-let result = people as Stu;//正确
+let stu = new Stu('wangwu', 23, '北京');
+stu as People; // 正确
 
-let stu = new Stu("wangwu", 23, "北京")
-stu as People;// 正确
-
-
-export { }
+export {};
