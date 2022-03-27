@@ -17,6 +17,15 @@ let str = `"<div style="width: 100%;height: 100%;opacity:1.0;border-width:0;bord
   </svg>
       </div>"`;
 
+let div = document.createElement('div')
+div.innerHTML = str
+console.log(div)
+let clipPath = div.querySelector('clipPath')
+console.log(clipPath)
+clipPath.style.transform = null
+console.log(clipPath)
+console.log(div.innerHTML)
+
 // let reg = /<clipPath([.|\s|\n]*)>/g;
 // 正确2
 let reg = /<clipPath(?:.|\n)+?style=((?:.|\n)+?)>/g;
@@ -27,28 +36,32 @@ let reg = /<clipPath(?:.|\n)+?style=((?:.|\n)+?)>/g;
 // /<clipPath(?:.|\n|\s)*style(.|\s)+?>/;
 // 死循环？？？
 // /<clipPath(?:.|\n|\s)*style=([\s|.|\w|=|"|'|:|(|)|,|;]*)>/;
-console.log(reg.test(str));
-str = str.replace(reg, function ($0, $1) {
-  let result = $0.replace($1, function ($0) {
-    // 非分号没生效 todo?
-    // let reg = /(transform:(.|[^;])*)/g;
-    // todo 如何让 . 在 [] 中也可以保持特殊含义？
-    let reg = /(transform[\s|.|\w|=|:|(|)|,]*)/g;
-    console.log(reg.test($0));
-    let result = $0.replace(reg, function ($0, $1, $2, $3) {
-      console.log($0);
-      console.log($1);
-      console.log($2);
-      console.log($3);
-      return '';
-    });
-    // console.log(result);
-    return result;
-  });
-  return result;
-});
+// console.log(reg.test(str));
 
-console.log(str);
+// str = str.replace(reg, function ($0, $1, $2) {
+//   console.log($0)
+//   console.log($1)
+//   console.log($2)
+//   let result = $0.replace($1, function ($0) {
+//     // 非分号没生效 todo?
+//     // let reg = /(transform:(.|[^;])*)/g;
+//     // todo 如何让 . 在 [] 中也可以保持特殊含义？
+//     let reg = /(transform[\s|.|\w|=|:|(|)|,]*)/g;
+//     console.log(reg.test($0));
+//     let result = $0.replace(reg, function ($0, $1, $2, $3) {
+//       console.log($0);
+//       console.log($1);
+//       console.log($2);
+//       console.log($3);
+//       return '';
+//     });
+//     // console.log(result);
+//     return result;
+//   });
+//   return result;
+// });
+
+// console.log(str);
 
 /*
 str = str.replace(reg, function ($0, $1) {
