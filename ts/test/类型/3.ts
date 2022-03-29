@@ -1,19 +1,25 @@
-<!--
+/*
  * @LastEditors: wudan01
  * @description: 文件描述
--->
-# 类型
+ */
+// 测试 const
+// 和 readonly 是否完全一致
 
-#### readonly 及 const
-> js const 无法检测 对象变量内部修改，ts 可以
-```
+//const arr=[10,30,40,"abc"]
+//arr=[100,30,40,"abc"]
+//arr[0]=100
+
 const arr = [10, 30, 40, 'abc'] as const;
-// 等同于
+// arr = [100, 30, 40, "abc"]
+// arr[0] = 100; //错误 无法分配到 "数组的索引为0位置的元素" ，因为它是只读属性
+
 const brr: readonly [10, 30, 40, 'abc'] = [10, 30, 40, 'abc'];
 
 // 报错 仅允许对数组和元组文本类型使用 "readonly" 类型修饰符。
 // TODO 原因
 // const crr: readonly Array<string | number> = [10, 30, 40, 'abc'];
+
+// brr[0] = 100;
 
 function showArr(arr: readonly any[]) {
   //类型“readonly any[]”中的索引签名仅允许读取。
@@ -22,24 +28,3 @@ function showArr(arr: readonly any[]) {
 }
 
 showArr(arr);
-```
-####  值作为类型
-> 变量实现类型时候，值只能为和类型同名的值
-```
-// 普通类型
-type iBoolean = boolean | 1 | 0
-
-// 接口
-interface option{
-  env: 7
-}
-```
-
-> 其他类型待补充
-
-# 问题
-#### 1. object 和 Object 区别
-> object 是纯类型，没有方法
-
-> Object 是构造函数, 挂有很多方法
-

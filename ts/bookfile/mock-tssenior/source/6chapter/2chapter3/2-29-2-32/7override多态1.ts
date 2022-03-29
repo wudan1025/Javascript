@@ -1,27 +1,36 @@
+/*
+ * @LastEditors: wudan01
+ * @description: 文件描述
+ */
 class People {
-  public name: string
+  public name: string;
   public eat() {
-    console.log("People父类的eat")
+    console.log('People父类的eat');
   }
 }
 
-class AmericanPeople extends People { // 美国人
-  public phone: string
+class AmericanPeople extends People {
+  // 美国人
+  public phone: string;
   public eat() {
-    console.log("用叉子吃饭...");
+    console.log('用叉子吃饭...');
   }
 }
 
-
-class ChinesePeople extends People { //中国人
+class ChinesePeople extends People {
+  //中国人
   public eat() {
-    console.log("用筷子吃饭...");
+    console.log('用筷子吃饭...');
+  }
+  sleep() {
+    console.log('sleep');
   }
 }
 
-class TuzhuPeople extends People { // 土族人
+class TuzhuPeople extends People {
+  // 土族人
   public eat() {
-    console.log("用手抓吃饭...");
+    console.log('用手抓吃饭...');
   }
 }
 // 父类的对象变量people可以接受任何一个子类的对象,
@@ -31,6 +40,9 @@ let people: People = new AmericanPeople();
 people.eat();
 people = new ChinesePeople();
 people.eat();
+if (people instanceof ChinesePeople) {
+  people.sleep();
+}
 people = new TuzhuPeople();
 people.eat();
 
