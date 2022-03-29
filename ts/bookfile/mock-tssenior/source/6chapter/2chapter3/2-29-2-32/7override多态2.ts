@@ -1,5 +1,5 @@
 
-abstract class Vechile {
+export default abstract class Vechile {
   static count: number = 3;
   public brand: string;// 品牌
   public vechileNo: string;// 车牌号
