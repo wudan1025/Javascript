@@ -3,7 +3,9 @@ abstract class People {//抽象类
 
   }
   public name: string
-  abstract eat(): void 
+  // 抽象方法
+  // 抽象方法必须在子类中实现？
+  abstract eat(): void
   //抽象方法 特点 1：没有方法体 2：带abstract关键字
 
   public step() {

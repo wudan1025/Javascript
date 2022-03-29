@@ -33,3 +33,5 @@ people = new ChinesePeople();
 people.eat();
 people = new TuzhuPeople();
 people.eat();
+
+// 多态发生在继承中
