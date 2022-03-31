@@ -1,3 +1,5 @@
+// 结构 rest 必须在最后
+// 元祖可以不放在最后
 let [username, age, ...rest]: [name_: string, age_: number,
   ...rest: any[], descri_: string] = ["wangwu", 23,
     "海口海淀岛四东路3号", "133123333", 23, "weixin", 3, "str"]
@@ -6,6 +8,7 @@ console.log("username:", username)//wangwu
 console.log("age:", age)//23
 console.log("rest:", rest)
 
+// as const 后不能限制变量类型((string | number)[])
 //const arr: (string | number)[] = [10, 30, 40, "abc", 30] as const
 // 类型 "readonly [10, 30, 40, "abc", 30]" 为 "readonly"，不能分配给可变类型 "(string | number)[]"
 //arr[0]=100
@@ -30,18 +33,23 @@ console.log("y1:", y1)
 // console.log("x2:", x2)
 // console.log("y2:", y2)
 
+// todo 将 第一个number 改为 string | number 是否可行？
+
+// 兼容改法1
 // let constnum2 = ["df", 30, 40, 60, "abc"]
 // //  把元组退化成"数组"
 // let [x2, ...y2]: [...any[]] = constnum2// 错误
 // console.log("x2:", x2)
 // console.log("y2:", y2)
 
+// 兼容改法2
 // let constnum3 = [10, 30, 40, 60, "abc"] as const
 // //  把元组退化成"数组"
 // let [x3, ...y3]: readonly [any, ...any[]] = constnum3// 错误
 // console.log("x3:", x3)
 // console.log("y3:", y3)
 
+// 不可以这么写
 let constnum4 = [10, 30, 40, 60, "abc"] as const
 //  把元组退化成"数组"
 let arr: readonly [any, ...any[]] = constnum4// 错误
