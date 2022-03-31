@@ -1,26 +1,29 @@
 // 结构 rest 必须在最后
 // 元祖可以不放在最后
-let [username, age, ...rest]: [name_: string, age_: number,
-  ...rest: any[], descri_: string] = ["wangwu", 23,
-    "海口海淀岛四东路3号", "133123333", 23, "weixin", 3, "str"]
+let [username, age, ...rest]: [
+  name_: string,
+  age_: number,
+  ...rest: any[],
+  descri_: string
+] = ['wangwu', 23, '海口海淀岛四东路3号', '133123333', 23, 'weixin', 3, 'str'];
 
-console.log("username:", username)//wangwu
-console.log("age:", age)//23
-console.log("rest:", rest)
+console.log('username:', username); //wangwu
+console.log('age:', age); //23
+console.log('rest:', rest);
 
 // as const 后不能限制变量类型((string | number)[])
 //const arr: (string | number)[] = [10, 30, 40, "abc", 30] as const
 // 类型 "readonly [10, 30, 40, "abc", 30]" 为 "readonly"，不能分配给可变类型 "(string | number)[]"
 //arr[0]=100
 
-let [x, ...y] = [10, 30, 40, 60, "abc"]
-console.log("x:", x)
-console.log("y:", y)
+let [x, ...y] = [10, 30, 40, 60, 'abc'];
+console.log('x:', x);
+console.log('y:', y);
 
-let constnum = [10, 30, 40, 60, "abc"]
-let [x1, ...y1] = constnum
-console.log("x1:", x1)
-console.log("y1:", y1)
+let constnum = [10, 30, 40, 60, 'abc'];
+let [x1, ...y1] = constnum;
+console.log('x1:', x1);
+console.log('y1:', y1);
 
 // let constnum2 = [10, 30, 40, 60, "abc"]
 // let [x2, ...y2]: (string | number)[] = constnum2
@@ -50,9 +53,9 @@ console.log("y1:", y1)
 // console.log("y3:", y3)
 
 // 不可以这么写
-let constnum4 = [10, 30, 40, 60, "abc"] as const
+let constnum4 = [10, 30, 40, 60, 'abc'] as const;
 //  把元组退化成"数组"
-let arr: readonly [any, ...any[]] = constnum4// 错误
+let arr: readonly [any, ...any[]] = constnum4; // 错误
 
 //arr[0] = 100 //readonly 和 as const 都是表示固定不变的，包括数组和元组中每一个元素都不能改变
 // readonly等效于as const
@@ -60,7 +63,7 @@ let arr: readonly [any, ...any[]] = constnum4// 错误
 //   //constnum5[0] = 33
 //   let arr = constnum5;
 // }
-let constnum5 = [10, 30, 40, 60, "abc"] as const
+let constnum5 = [10, 30, 40, 60, 'abc'] as const;
 // readonly等效于as const
 function tail(arr: readonly [any, ...any[]]) {
   //arr[0] = 33
@@ -68,4 +71,4 @@ function tail(arr: readonly [any, ...any[]]) {
   return rest;
 }
 console.log(tail(constnum5));
-export { }
+export {};
