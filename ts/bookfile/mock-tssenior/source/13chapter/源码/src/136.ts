@@ -11,6 +11,7 @@ info(stuObj)
 
 // 函数解构
 
+// js 是否能这样写 todo?
 function subInfo({ username, phone }: TypStuobj) {
   console.log("name:", username, " phone:", phone);
   return 3

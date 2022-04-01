@@ -7,19 +7,21 @@ export enum EnumAuditStatus {
 
 type Expense = {
   id: number, events: string, time: Date,
-   enumAuditStatus: EnumAuditStatus
+  enumAuditStatus: EnumAuditStatus
 }
 
 // 审核类
 class MyAduit {
 
+  // 枚举作为类型
   getAduitStatus(status: EnumAuditStatus): void {
 
+    // 枚举作为值
     if (status === EnumAuditStatus.NO_ADUIT) {
       console.log("没有审核");
     } else if (status === EnumAuditStatus.MANAGER_ADUIT_SUCCESS) {
       console.log("经理审核通过");
-      
+
 
     } else if (status === EnumAuditStatus.FINAL_ADUIT_SUCCESS) {
       console.log("财务审核通过");

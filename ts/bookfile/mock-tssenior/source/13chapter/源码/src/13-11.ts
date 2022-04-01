@@ -6,7 +6,7 @@ const Status = {
 }
 // 审核类
 class MyAduit {
-
+  // 方法类型不够具体
   getAduitStatus(status: number): void {
 
     if (status === Status.NO_ADUIT) {
