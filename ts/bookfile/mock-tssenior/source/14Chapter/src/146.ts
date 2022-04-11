@@ -3,11 +3,12 @@
 
 
 // Vuex4
+// 接口当名字的函数类型
 interface ActionContext {
   (state: any, commit: any): void
 }
 
-let actionContext:ActionContext=(state:any,commit:any):void=>{
-    console.log("state:",state);
+let actionContext: ActionContext = (state: any, commit: any): void => {
+  console.log("state:", state);
 }
-actionContext("abc","df")
+actionContext("abc", "df")

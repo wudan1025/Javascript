@@ -1,11 +1,17 @@
 
+// class 可以解决
+
+// 属性多，方法少的场景
 interface Product {
   id: number;
   name: string;
   price: number;
   count: number;
+  // 不确定类型
   //mark?: string;
+  // 可索引类型
   [key: string]: any;
+  // 函数
   transfer: () => void
 }
 
@@ -23,6 +29,8 @@ calToal({
 })
 
 interface Getter {
+  // 可索引类型 key 是 string 类型，value 是函数
+  // 限定 value 参数 为 state,并且 类型为any
   [key: string]: (state: any) => void
 }
 
