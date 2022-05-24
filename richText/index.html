@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div" contenteditable="true">测试测试测试</div>
+
+    <script>
+        let el = document.getElementById('div')
+
+
+        function test() {
+            let sel = window.getSelection()
+            console.log(window.getSelection())
+
+            let exec = () => {
+                execCmd('styleWithCSS', true);
+                execCmd('bold');
+                execCmd('styleWithCSS', false);
+            };
+            // exec();
+        }
+
+
+
+        function execCmd(command, ...args) {
+            let value = args[0];
+            return document.execCommand(command, false, value);
+        }
+    </script>
+</body>
+
+</html>
